@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes create-strapi@5.47.1 emma-sport-cms --skip-cloud --non-interactive --no-run --typescript --dbclient sqlite --no-git-init --no-example)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\categorie\\\\content-types\\\\categorie\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\categorie\\\\controllers\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\categorie\\\\routes\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\categorie\\\\services\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\marque\\\\content-types\\\\marque\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\marque\\\\controllers\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\marque\\\\routes\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\marque\\\\services\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\produit\\\\content-types\\\\produit\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\produit\\\\controllers\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\produit\\\\routes\" \"c:\\\\Users\\\\izichange\\\\Documents\\\\emma-sport-cms\\\\src\\\\api\\\\produit\\\\services\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\izichange\\Documents\\emma-sport-cms\\src\\api\\categorie\\content-types"
+    ]
+  }
+}
