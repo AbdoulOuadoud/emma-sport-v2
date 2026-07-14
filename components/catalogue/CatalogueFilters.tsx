@@ -2,11 +2,12 @@
 
 import { useState, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import type { Category, Brand } from "@/types";
+import type { Category, Brand, ArticleType } from "@/types";
 
 interface CatalogueFiltersProps {
   categories: Category[];
   brands: Brand[];
+  articleTypes: ArticleType[];
   isOpen: boolean;
   onClose: () => void;
 }
@@ -26,6 +27,7 @@ const ChevronIcon = ({ open }: { open: boolean }) => (
 export default function CatalogueFilters({
   categories,
   brands,
+  articleTypes,
   isOpen,
   onClose,
 }: CatalogueFiltersProps) {
@@ -36,6 +38,7 @@ export default function CatalogueFilters({
   const [openGroups, setOpenGroups] = useState({
     categories: true,
     brands: true,
+    types: true,
     prix: true,
     dispo: true,
   });
@@ -50,6 +53,7 @@ export default function CatalogueFilters({
   const current = {
     categorie: searchParams.get("categorie") ?? "",
     marque: searchParams.get("marque") ?? "",
+    typeArticle: searchParams.get("typeArticle") ?? "",
     disponible: searchParams.get("disponible") ?? "",
     prixMin: searchParams.get("prixMin") ?? "",
     prixMax: searchParams.get("prixMax") ?? "",
@@ -94,6 +98,7 @@ export default function CatalogueFilters({
   const hasFilters =
     current.categorie ||
     current.marque ||
+    current.typeArticle ||
     current.disponible ||
     current.prixMin ||
     current.prixMax;
@@ -175,6 +180,42 @@ export default function CatalogueFilters({
                   onChange={() => applyFilter("marque", brand.nom)}
                 />
                 {brand.nom}
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Article type */}
+      <div className="filter-group">
+        <button
+          className={`filter-group-title${openGroups.types ? " open" : ""}`}
+          onClick={() => toggleGroup("types")}
+        >
+          Type d&apos;article <ChevronIcon open={openGroups.types} />
+        </button>
+        {openGroups.types && (
+          <div className="filter-options">
+            <label className="filter-opt">
+              <input
+                type="radio"
+                name="typeArticle"
+                value=""
+                checked={!current.typeArticle}
+                onChange={() => applyFilter("typeArticle", "")}
+              />
+              Tous
+            </label>
+            {articleTypes.map((type) => (
+              <label key={type.slug} className="filter-opt">
+                <input
+                  type="radio"
+                  name="typeArticle"
+                  value={type.slug}
+                  checked={current.typeArticle === type.slug}
+                  onChange={() => applyFilter("typeArticle", type.slug)}
+                />
+                {type.nom}
               </label>
             ))}
           </div>

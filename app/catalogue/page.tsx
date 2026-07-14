@@ -5,7 +5,7 @@ import Header from "@/components/home/Header";
 import Footer from "@/components/home/Footer";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import CatalogueClient from "@/components/catalogue/CatalogueClient";
-import { getProducts, getCategories, getBrands } from "@/services/strapi";
+import { getProducts, getCategories, getBrands, getArticleTypes } from "@/services/products";
 import type { ProductFilters, SortOption } from "@/types";
 import { getSearchParam, getSearchParamNumber } from "@/lib/utils";
 
@@ -28,6 +28,7 @@ export default async function CataloguePage({ searchParams }: PageProps) {
     search: getSearchParam(sp.search),
     categorie: getSearchParam(sp.categorie),
     marque: getSearchParam(sp.marque),
+    typeArticle: getSearchParam(sp.typeArticle),
     prixMin: getSearchParamNumber(sp.prixMin),
     prixMax: getSearchParamNumber(sp.prixMax),
     disponible:
@@ -37,10 +38,11 @@ export default async function CataloguePage({ searchParams }: PageProps) {
     pageSize: 12,
   };
 
-  const [productsRes, categoriesRes, brandsRes] = await Promise.all([
+  const [productsRes, categoriesRes, brandsRes, articleTypes] = await Promise.all([
     getProducts(filters),
     getCategories(),
     getBrands(),
+    getArticleTypes(),
   ]);
 
   return (
@@ -80,6 +82,7 @@ export default async function CataloguePage({ searchParams }: PageProps) {
                 products={productsRes.data}
                 categories={categoriesRes.data}
                 brands={brandsRes.data}
+                articleTypes={articleTypes}
                 pagination={productsRes.meta.pagination}
               />
             </Suspense>

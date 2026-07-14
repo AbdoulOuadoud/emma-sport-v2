@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Product, Category, Brand } from "@/types";
+import type { Product, Category, Brand, ArticleType } from "@/types";
 import ProductCard from "@/components/catalogue/ProductCard";
 import CatalogueFilters from "@/components/catalogue/CatalogueFilters";
 import CatalogueToolbar from "@/components/catalogue/CatalogueToolbar";
@@ -11,6 +11,7 @@ interface CatalogueClientProps {
   products: Product[];
   categories: Category[];
   brands: Brand[];
+  articleTypes: ArticleType[];
   pagination: { page: number; pageCount: number; total: number };
 }
 
@@ -24,6 +25,7 @@ export default function CatalogueClient({
   products,
   categories,
   brands,
+  articleTypes,
   pagination,
 }: CatalogueClientProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -40,6 +42,7 @@ export default function CatalogueClient({
         <CatalogueFilters
           categories={categories}
           brands={brands}
+          articleTypes={articleTypes}
           isOpen={filtersOpen}
           onClose={() => setFiltersOpen(false)}
         />

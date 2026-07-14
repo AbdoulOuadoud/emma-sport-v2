@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/types";
-import { formatPrice, getDiscountPercent, getStrapiImageUrl } from "@/lib/utils";
+import { formatPrice, getDiscountPercent } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -35,11 +35,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     ? { cls: "promo", label: `-${discountPct}%` }
     : null;
 
-  const firstImage =
-    images[0]?.formats?.medium?.url ??
-    images[0]?.formats?.small?.url ??
-    images[0]?.url ??
-    null;
+  const firstImage = images[0]?.url ?? null;
 
   return (
     <Link
@@ -64,8 +60,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         {firstImage ? (
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Image
-              src={getStrapiImageUrl(firstImage)}
-              alt={images[0]?.alternativeText ?? nom}
+              src={firstImage}
+              alt={images[0]?.alt ?? nom}
               fill
               style={{ objectFit: "cover" }}
               sizes="(max-width: 760px) 50vw, (max-width: 1040px) 33vw, 25vw"

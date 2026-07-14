@@ -1,41 +1,29 @@
-export interface StrapiImageFormat {
-  url: string;
-  width: number;
-  height: number;
-}
-
-export interface StrapiImage {
+export interface ProductImage {
   id: number;
   url: string;
-  alternativeText: string | null;
-  width: number;
-  height: number;
-  formats?: {
-    thumbnail?: StrapiImageFormat;
-    small?: StrapiImageFormat;
-    medium?: StrapiImageFormat;
-    large?: StrapiImageFormat;
-  };
+  alt: string | null;
 }
 
 export interface Category {
   id: number;
-  documentId: string;
   nom: string;
   slug: string;
-  image: StrapiImage | null;
+  image: ProductImage | null;
 }
 
 export interface Brand {
   id: number;
-  documentId: string;
   nom: string;
-  logo: StrapiImage | null;
+  logo: ProductImage | null;
+}
+
+export interface ArticleType {
+  slug: string;
+  nom: string;
 }
 
 export interface Product {
   id: number;
-  documentId: string;
   nom: string;
   slug: string;
   description: string;
@@ -43,30 +31,28 @@ export interface Product {
   prixPromo: number | null;
   stock: number;
   sku: string;
-  images: StrapiImage[];
+  images: ProductImage[];
   categorie: Category;
   marque: Brand;
+  typeArticle: ArticleType | null;
   vedette: boolean;
   disponible: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface StrapiListResponse<T> {
-  data: T[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }
 
-export interface StrapiSingleResponse<T> {
-  data: T;
-  meta: Record<string, unknown>;
+export interface ListResponse<T> {
+  data: T[];
+  meta: {
+    pagination: Pagination;
+  };
 }
 
 export type SortOption =
@@ -79,6 +65,7 @@ export interface ProductFilters {
   search?: string;
   categorie?: string;
   marque?: string;
+  typeArticle?: string;
   prixMin?: number;
   prixMax?: number;
   disponible?: boolean;

@@ -25,15 +25,6 @@ export function truncate(text: string, max: number): string {
   return `${text.slice(0, max).trimEnd()}…`;
 }
 
-export function getStrapiImageUrl(
-  path: string,
-  strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337"
-): string {
-  if (!path) return "";
-  if (path.startsWith("http")) return path;
-  return `${strapiUrl}${path}`;
-}
-
 export function getSearchParam(
   value: string | string[] | undefined
 ): string | undefined {

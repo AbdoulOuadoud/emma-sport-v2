@@ -11,8 +11,8 @@ import {
   getProductBySlug,
   getSimilarProducts,
   getAllProductSlugs,
-} from "@/services/strapi";
-import { formatPrice, getDiscountPercent, getStrapiImageUrl } from "@/lib/utils";
+} from "@/services/products";
+import { formatPrice, getDiscountPercent } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -33,10 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Produit introuvable" };
   }
 
-  const imageUrl =
-    product.images[0]?.formats?.medium?.url ??
-    product.images[0]?.url ??
-    null;
+  const imageUrl = product.images[0]?.url ?? null;
 
   return {
     title: product.nom,
@@ -44,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${product.nom} | Emma Sport`,
       description: product.description.slice(0, 155),
-      images: imageUrl ? [{ url: getStrapiImageUrl(imageUrl) }] : [],
+      images: imageUrl ? [{ url: imageUrl }] : [],
     },
   };
 }

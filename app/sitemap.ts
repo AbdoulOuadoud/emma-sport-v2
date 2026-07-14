@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllProductSlugs, getCategories } from "@/services/strapi";
+import { getAllProductSlugs, getCategories } from "@/services/products";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emma-sport.bj";
 

@@ -1,159 +1,812 @@
-import type { Product, Category, Brand, StrapiListResponse } from "@/types";
+import type { Product, Category, Brand, ArticleType } from "@/types";
 
-const CAT_RUNNING: Category = {
-  id: 1, documentId: "cat-running", nom: "Running", slug: "running", image: null,
-};
-const CAT_FOOTBALL: Category = {
-  id: 2, documentId: "cat-football", nom: "Football", slug: "football", image: null,
-};
-const CAT_FITNESS: Category = {
-  id: 3, documentId: "cat-fitness", nom: "Fitness", slug: "fitness", image: null,
-};
-const CAT_MUSCU: Category = {
-  id: 4, documentId: "cat-musculation", nom: "Musculation", slug: "musculation", image: null,
-};
-const CAT_BASKET: Category = {
-  id: 5, documentId: "cat-basketball", nom: "Basketball", slug: "basketball", image: null,
-};
-const CAT_JOGGING: Category = {
-  id: 6, documentId: "cat-jogging", nom: "Jogging", slug: "jogging", image: null,
-};
-const CAT_BASKETS: Category = {
-  id: 7, documentId: "cat-baskets", nom: "Baskets", slug: "baskets", image: null,
-};
-const CAT_EQUIPEMENTS: Category = {
-  id: 8, documentId: "cat-equipements", nom: "Équipements", slug: "equipements", image: null,
-};
+const CAT_RUNNING: Category = { id: 1, nom: "Running", slug: "running", image: null };
+const CAT_FOOTBALL: Category = { id: 2, nom: "Football", slug: "football", image: null };
+const CAT_FITNESS: Category = { id: 3, nom: "Fitness", slug: "fitness", image: null };
+const CAT_MUSCU: Category = { id: 4, nom: "Musculation", slug: "musculation", image: null };
+const CAT_BASKET: Category = { id: 5, nom: "Basketball", slug: "basketball", image: null };
+const CAT_JOGGING: Category = { id: 6, nom: "Jogging", slug: "jogging", image: null };
+const CAT_BASKETS: Category = { id: 7, nom: "Baskets", slug: "baskets", image: null };
+const CAT_EQUIPEMENTS: Category = { id: 8, nom: "Équipements", slug: "equipements", image: null };
 
-const BRAND_VELOCE: Brand = { id: 1, documentId: "b-veloce", nom: "Veloce", logo: null };
-const BRAND_FORZA: Brand = { id: 2, documentId: "b-forza", nom: "Forza", logo: null };
-const BRAND_PULSE: Brand = { id: 3, documentId: "b-pulse", nom: "Pulse", logo: null };
-const BRAND_KINETIK: Brand = { id: 4, documentId: "b-kinetik", nom: "Kinetik", logo: null };
-const BRAND_APEX: Brand = { id: 5, documentId: "b-apex", nom: "Apex", logo: null };
-const BRAND_STRIDE: Brand = { id: 6, documentId: "b-stride", nom: "Stride", logo: null };
-const BRAND_FLEXA: Brand = { id: 7, documentId: "b-flexa", nom: "Flexa", logo: null };
-const BRAND_STRATOS: Brand = { id: 8, documentId: "b-stratos", nom: "Stratos", logo: null };
+const BRAND_NIKE: Brand = { id: 1, nom: "Nike", logo: null };
+const BRAND_ADIDAS: Brand = { id: 2, nom: "Adidas", logo: null };
+const BRAND_UNDER_ARMOUR: Brand = { id: 3, nom: "Under Armour", logo: null };
+
+const ADIDAS_IMG_BASE = "/articles/Vetements/Adidas";
+const NIKE_IMG_BASE = "/articles/Vetements/Nike";
+
+const TYPE_SHORT: ArticleType = { slug: "short", nom: "Short" };
+const TYPE_JOGGING: ArticleType = { slug: "jogging", nom: "Jogging" };
+const TYPE_TSHIRT: ArticleType = { slug: "tshirt", nom: "T-shirt" };
+const TYPE_DEBARDEUR: ArticleType = { slug: "debardeur", nom: "Débardeur" };
+const TYPE_CHAUSSETTES: ArticleType = { slug: "chaussettes", nom: "Chaussettes" };
+const TYPE_CHAUSSURES: ArticleType = { slug: "chaussures", nom: "Chaussures" };
+const TYPE_CRAMPONS: ArticleType = { slug: "crampons", nom: "Crampons" };
+const TYPE_MAILLOT: ArticleType = { slug: "maillot", nom: "Maillot" };
+const TYPE_VESTE: ArticleType = { slug: "veste", nom: "Veste" };
+const TYPE_EQUIPEMENT: ArticleType = { slug: "equipement", nom: "Équipement" };
+const TYPE_BALLON: ArticleType = { slug: "ballon", nom: "Ballon" };
+const TYPE_SAC: ArticleType = { slug: "sac", nom: "Sac" };
+
+export const ARTICLE_TYPES: ArticleType[] = [
+  TYPE_SHORT, TYPE_JOGGING, TYPE_TSHIRT, TYPE_DEBARDEUR, TYPE_CHAUSSETTES,
+  TYPE_CHAUSSURES, TYPE_CRAMPONS, TYPE_MAILLOT, TYPE_VESTE, TYPE_EQUIPEMENT,
+  TYPE_BALLON, TYPE_SAC,
+];
 
 export const MOCK_PRODUCTS: Product[] = [
   {
-    id: 1, documentId: "p1",
+    id: 1,
     nom: "Velocity Pro Runner",
     slug: "velocity-pro-runner",
     description: "La chaussure running haute performance pour les coureurs exigeants. Semelle amortissante React, tige en mesh respirant Flyknit, retour d'énergie optimal. Idéale pour les distances 5 à 42 km.",
     prix: 45000, prixPromo: null, stock: 12, sku: "VPR-001",
-    images: [], categorie: CAT_RUNNING, marque: BRAND_VELOCE,
-    vedette: true, disponible: true,
+    images: [], categorie: CAT_RUNNING, marque: BRAND_NIKE,
+    typeArticle: TYPE_CHAUSSURES, vedette: true, disponible: true,
     createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-01T00:00:00.000Z",
   },
   {
-    id: 2, documentId: "p2",
+    id: 2,
     nom: "Ballon Match Pro",
     slug: "ballon-match-pro",
     description: "Ballon de football homologué FIFA. Conçu pour les matchs officiels, surface thermosoudée 32 panneaux, chambre à air butyle. Résistant à l'humidité.",
     prix: 9000, prixPromo: null, stock: 30, sku: "BMP-002",
-    images: [], categorie: CAT_FOOTBALL, marque: BRAND_FORZA,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS,
+    typeArticle: TYPE_BALLON, vedette: false, disponible: true,
     createdAt: "2026-01-02T00:00:00.000Z", updatedAt: "2026-01-02T00:00:00.000Z",
   },
   {
-    id: 3, documentId: "p3",
+    id: 3,
     nom: "Tapis Grip+",
     slug: "tapis-grip-plus",
     description: "Tapis de yoga et fitness haute densité 6mm. Surface antidérapante double face, matière TPE écologique, facile à nettoyer. Livré avec sangle de transport.",
     prix: 18000, prixPromo: 14000, stock: 18, sku: "TGP-003",
-    images: [], categorie: CAT_FITNESS, marque: BRAND_PULSE,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_FITNESS, marque: BRAND_UNDER_ARMOUR,
+    typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
     createdAt: "2026-01-03T00:00:00.000Z", updatedAt: "2026-01-03T00:00:00.000Z",
   },
   {
-    id: 4, documentId: "p4",
+    id: 4,
     nom: "Haltères Ajustables 20kg",
     slug: "halteres-ajustables-20kg",
     description: "Set d'haltères réglables de 2 à 20 kg par incrément de 2 kg. Manche ergonomique antidérapant, système de serrage rapide. Idéal pour l'entraînement à domicile.",
     prix: 35000, prixPromo: null, stock: 8, sku: "HAJ-004",
-    images: [], categorie: CAT_MUSCU, marque: BRAND_KINETIK,
-    vedette: true, disponible: true,
+    images: [], categorie: CAT_MUSCU, marque: BRAND_UNDER_ARMOUR,
+    typeArticle: TYPE_EQUIPEMENT, vedette: true, disponible: true,
     createdAt: "2026-01-04T00:00:00.000Z", updatedAt: "2026-01-04T00:00:00.000Z",
   },
   {
-    id: 5, documentId: "p5",
+    id: 5,
     nom: "Maillot Court Pro",
     slug: "maillot-court-pro",
     description: "Maillot de basketball technologie Dri-Fit. Tissu léger et respirant, coupe ample pour la liberté de mouvement. Disponible en plusieurs coloris — flocage nom et numéro possible en boutique.",
     prix: 12000, prixPromo: null, stock: 22, sku: "MCP-005",
-    images: [], categorie: CAT_BASKET, marque: BRAND_APEX,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_BASKET, marque: BRAND_NIKE,
+    typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
     createdAt: "2026-01-05T00:00:00.000Z", updatedAt: "2026-01-05T00:00:00.000Z",
   },
   {
-    id: 6, documentId: "p6",
+    id: 6,
     nom: "Veste Aero Wind",
     slug: "veste-aero-wind",
     description: "Veste coupe-vent running ultra-légère. Tissu imperméable respirant, capuche amovible, réfléchissants 360°. Pliable dans sa propre poche.",
     prix: 27000, prixPromo: 23000, stock: 14, sku: "VAW-006",
-    images: [], categorie: CAT_RUNNING, marque: BRAND_STRIDE,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_RUNNING, marque: BRAND_NIKE,
+    typeArticle: TYPE_VESTE, vedette: false, disponible: true,
     createdAt: "2026-01-06T00:00:00.000Z", updatedAt: "2026-01-06T00:00:00.000Z",
   },
   {
-    id: 7, documentId: "p7",
+    id: 7,
     nom: "Crampons Strike X",
     slug: "crampons-strike-x",
     description: "Crampons football terrain synthétique. Semelle TPU ultra-rigide, tige en mesh renforcé, système Stud Lock anti-rotation. Réservation possible.",
     prix: 32000, prixPromo: null, stock: 0, sku: "CSX-007",
-    images: [], categorie: CAT_FOOTBALL, marque: BRAND_VELOCE,
-    vedette: false, disponible: false,
+    images: [], categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS,
+    typeArticle: TYPE_CRAMPONS, vedette: false, disponible: false,
     createdAt: "2026-01-07T00:00:00.000Z", updatedAt: "2026-01-07T00:00:00.000Z",
   },
   {
-    id: 8, documentId: "p8",
+    id: 8,
     nom: "Sneakers HighTop",
     slug: "sneakers-hightop",
     description: "Chaussures basketball montantes avec amorti Air Max en talon. Tige en cuir synthétique renforcé, semelle intercalaire Zoom pour les démarrages explosifs.",
     prix: 48000, prixPromo: null, stock: 6, sku: "SHT-008",
-    images: [], categorie: CAT_BASKET, marque: BRAND_APEX,
-    vedette: true, disponible: true,
+    images: [], categorie: CAT_BASKET, marque: BRAND_NIKE,
+    typeArticle: TYPE_CHAUSSURES, vedette: true, disponible: true,
     createdAt: "2026-01-08T00:00:00.000Z", updatedAt: "2026-01-08T00:00:00.000Z",
   },
   {
-    id: 9, documentId: "p9",
+    id: 9,
     nom: "Survêtement Training Flex",
     slug: "survetement-training-flex",
     description: "Ensemble jogging molletonné, veste zippée à capuche et pantalon resserré aux chevilles. Confortable pour l'échauffement, la récupération ou un look streetwear au quotidien.",
     prix: 15000, prixPromo: null, stock: 25, sku: "STF-009",
-    images: [], categorie: CAT_JOGGING, marque: BRAND_FLEXA,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_JOGGING, marque: BRAND_ADIDAS,
+    typeArticle: TYPE_JOGGING, vedette: false, disponible: true,
     createdAt: "2026-01-09T00:00:00.000Z", updatedAt: "2026-01-09T00:00:00.000Z",
   },
   {
-    id: 10, documentId: "p10",
+    id: 10,
     nom: "Sneakers Street Runner",
     slug: "sneakers-street-runner",
     description: "Baskets urbaines polyvalentes, idéales au quotidien comme à l'entraînement léger. Semelle EVA légère et amortissante, tige en toile respirante, design moderne en plusieurs coloris.",
     prix: 25000, prixPromo: 21000, stock: 16, sku: "SSR-010",
-    images: [], categorie: CAT_BASKETS, marque: BRAND_STRATOS,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_BASKETS, marque: BRAND_UNDER_ARMOUR,
+    typeArticle: TYPE_CHAUSSURES, vedette: false, disponible: true,
     createdAt: "2026-01-10T00:00:00.000Z", updatedAt: "2026-01-10T00:00:00.000Z",
   },
   {
-    id: 11, documentId: "p11",
+    id: 11,
     nom: "Short Training Elite",
     slug: "short-training-elite",
     description: "Short fitness polyvalent avec poche zippée. Tissu élastique 4 directions, taille élastique réglable, longueur mi-cuisse. Convient running, salle, cours collectifs.",
     prix: 9000, prixPromo: null, stock: 35, sku: "STE-011",
-    images: [], categorie: CAT_FITNESS, marque: BRAND_PULSE,
-    vedette: false, disponible: true,
+    images: [], categorie: CAT_FITNESS, marque: BRAND_UNDER_ARMOUR,
+    typeArticle: TYPE_SHORT, vedette: false, disponible: true,
     createdAt: "2026-01-11T00:00:00.000Z", updatedAt: "2026-01-11T00:00:00.000Z",
   },
   {
-    id: 12, documentId: "p12",
+    id: 12,
     nom: "Sac de Sport Performance",
     slug: "sac-de-sport-performance",
     description: "Sac de sport spacieux avec compartiment chaussures séparé et poche pour gourde. Tissu déperlant résistant, bandoulière rembourrée et réglable — le compagnon idéal pour vos séances et déplacements.",
     prix: 12000, prixPromo: null, stock: 20, sku: "SSP-012",
-    images: [], categorie: CAT_EQUIPEMENTS, marque: BRAND_KINETIK,
-    vedette: true, disponible: true,
+    images: [], categorie: CAT_EQUIPEMENTS, marque: BRAND_UNDER_ARMOUR,
+    typeArticle: TYPE_SAC, vedette: true, disponible: true,
     createdAt: "2026-01-12T00:00:00.000Z", updatedAt: "2026-01-12T00:00:00.000Z",
+  },
+
+  // --- Adidas — Shorts ---
+  {
+    id: 13, nom: "Short Adidas Zip Anthracite", slug: "short-adidas-zip-anthracite",
+    description: "Short d'entraînement Adidas gris anthracite avec poche zippée sécurisée. Taille élastique à cordon, tissu léger respirant. Idéal salle, course ou échauffement.",
+    prix: 13000, prixPromo: null, stock: 10, sku: "AD-SH-001",
+    images: [{ id: 1301, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-zip-anthracite.png`, alt: "Short Adidas zip anthracite" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: true, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 14, nom: "Short Adidas 3-Bandes Blanc", slug: "short-adidas-3-bandes-blanc",
+    description: "Short Adidas blanc à 3 bandes signature. Coupe sport classique, tissu respirant pour l'entraînement quotidien.",
+    prix: 12000, prixPromo: null, stock: 14, sku: "AD-SH-002",
+    images: [{ id: 1302, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-3bandes-blanc.png`, alt: "Short Adidas 3-bandes blanc" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 15, nom: "Short Adidas Camo Gris", slug: "short-adidas-camo-gris",
+    description: "Short Adidas motif camouflage gris, cordon de serrage contrastant. Look streetwear, confortable pour le sport comme au quotidien.",
+    prix: 14000, prixPromo: null, stock: 18, sku: "AD-SH-003",
+    images: [{ id: 1303, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-camo-gris.png`, alt: "Short Adidas camouflage gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 16, nom: "Short Adidas Camo Liseré Vert", slug: "short-adidas-camo-listere-vert",
+    description: "Short Adidas camouflage gris avec liseré vert fluo sur les côtés. Coupe ajustée, idéal pour les entraînements intensifs.",
+    prix: 14500, prixPromo: null, stock: 9, sku: "AD-SH-004",
+    images: [{ id: 1304, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-camo-vert.png`, alt: "Short Adidas camouflage liseré vert" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 17, nom: "Short Adidas Chiné Marine", slug: "short-adidas-chine-marine",
+    description: "Short Adidas chiné bleu marine avec bande latérale noire et blanche. Tissu doux chiné, parfait pour le confort au quotidien.",
+    prix: 13500, prixPromo: null, stock: 22, sku: "AD-SH-005",
+    images: [{ id: 1305, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-chine-marine.png`, alt: "Short Adidas chiné marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 18, nom: "Short Adidas Zip Gris Clair", slug: "short-adidas-zip-gris-clair",
+    description: "Short Adidas gris clair, poche zippée et bandes blanches signature. Coupe confortable pour le sport en salle ou en extérieur.",
+    prix: 12500, prixPromo: null, stock: 16, sku: "AD-SH-006",
+    images: [{ id: 1306, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-zip-gris-clair.png`, alt: "Short Adidas zip gris clair" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 20, nom: "Short Adidas 3-Bandes Marine", slug: "short-adidas-3-bandes-marine",
+    description: "Short Adidas bleu marine à 3 bandes blanches sur le côté. Coupe classique, tissu résistant pour un usage quotidien.",
+    prix: 13000, prixPromo: null, stock: 20, sku: "AD-SH-008",
+    images: [{ id: 1308, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-3bandes-marine.png`, alt: "Short Adidas 3-bandes marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 22, nom: "Short Adidas 3-Bandes Gris Clair", slug: "short-adidas-3-bandes-gris-clair",
+    description: "Short Adidas gris clair à 3 bandes blanches signature. Léger et respirant, parfait pour l'entraînement par temps chaud.",
+    prix: 12000, prixPromo: null, stock: 15, sku: "AD-SH-010",
+    images: [{ id: 1310, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-3bandes-gris-clair.png`, alt: "Short Adidas 3-bandes gris clair" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 23, nom: "Short Adidas Terrex Bleu Clair", slug: "short-adidas-terrex-bleu-clair",
+    description: "Short Adidas Terrex bleu clair, poches zippées sécurisées. Conçu pour la randonnée et les activités outdoor, tissu technique résistant.",
+    prix: 15000, prixPromo: null, stock: 11, sku: "AD-SH-011",
+    images: [{ id: 1311, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-terrex-bleu-clair.png`, alt: "Short Adidas Terrex bleu clair" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 24, nom: "Short Adidas Terrex Bleu", slug: "short-adidas-terrex-bleu",
+    description: "Short Adidas Terrex bleu, poches zippées et finitions techniques. Pensé pour l'outdoor et les longues sorties actives.",
+    prix: 15000, prixPromo: 12500, stock: 19, sku: "AD-SH-012",
+    images: [{ id: 1312, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-terrex-bleu.png`, alt: "Short Adidas Terrex bleu" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 25, nom: "Short Adidas Zip Menthe", slug: "short-adidas-zip-menthe",
+    description: "Short Adidas vert menthe avec poche zippée et bandes blanches. Coloris original, tissu doux et respirant.",
+    prix: 13500, prixPromo: null, stock: 13, sku: "AD-SH-013",
+    images: [{ id: 1313, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-zip-menthe.png`, alt: "Short Adidas zip menthe" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 26, nom: "Short Adidas Zip Gris Clair II", slug: "short-adidas-zip-gris-clair-2",
+    description: "Short Adidas gris clair, poches zippées et bandes contrastantes. Coupe confortable pour l'entraînement quotidien.",
+    prix: 12500, prixPromo: null, stock: 17, sku: "AD-SH-014",
+    images: [{ id: 1314, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-zip-gris-clair-2.png`, alt: "Short Adidas zip gris clair variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 27, nom: "Short Adidas Zip Gris", slug: "short-adidas-zip-gris",
+    description: "Short Adidas gris avec poche zippée et bandes contrastantes. Polyvalent, confortable pour le sport comme le quotidien.",
+    prix: 12000, prixPromo: null, stock: 10, sku: "AD-SH-015",
+    images: [{ id: 1315, url: `${ADIDAS_IMG_BASE}/Shorts/adidas-short-zip-gris.png`, alt: "Short Adidas zip gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+
+  // --- Adidas — Débardeurs ---
+  {
+    id: 28, nom: "Débardeur Adidas Bleu", slug: "debardeur-adidas-bleu",
+    description: "Débardeur Adidas bleu sans manches, tissu technique respirant. Idéal pour les entraînements intenses et les fortes chaleurs.",
+    prix: 9000, prixPromo: null, stock: 25, sku: "AD-DB-001",
+    images: [{ id: 1401, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-bleu.png`, alt: "Débardeur Adidas bleu" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 29, nom: "Débardeur Adidas Noir", slug: "debardeur-adidas-noir",
+    description: "Débardeur Adidas noir sans manches, coupe athlétique. Tissu léger qui évacue la transpiration pendant l'effort.",
+    prix: 8500, prixPromo: null, stock: 18, sku: "AD-DB-002",
+    images: [{ id: 1402, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-noir.png`, alt: "Débardeur Adidas noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 30, nom: "Débardeur Adidas Blanc 3-Bandes", slug: "debardeur-adidas-blanc-3-bandes",
+    description: "Débardeur Adidas blanc à 3 bandes signature sur le côté. Coupe sport, parfait pour la musculation et le cardio.",
+    prix: 9000, prixPromo: null, stock: 14, sku: "AD-DB-003",
+    images: [{ id: 1403, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-blanc.png`, alt: "Débardeur Adidas blanc 3-bandes" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 31, nom: "Débardeur Adidas Kaki", slug: "debardeur-adidas-kaki",
+    description: "Débardeur Adidas kaki sans manches, design épuré. Tissu doux et résistant, idéal pour l'entraînement quotidien.",
+    prix: 8500, prixPromo: null, stock: 20, sku: "AD-DB-004",
+    images: [{ id: 1404, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-kaki.png`, alt: "Débardeur Adidas kaki" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 32, nom: "Débardeur Adidas Gris Clair", slug: "debardeur-adidas-gris-clair",
+    description: "Débardeur Adidas gris clair avec perforations latérales pour une meilleure ventilation. Coupe athlétique, finitions 3-bandes.",
+    prix: 8000, prixPromo: null, stock: 9, sku: "AD-DB-005",
+    images: [{ id: 1405, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-gris-clair.png`, alt: "Débardeur Adidas gris clair" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 33, nom: "Débardeur Adidas Bleu-Gris", slug: "debardeur-adidas-bleu-gris",
+    description: "Débardeur Adidas bleu-gris, bandes signature sur le côté. Tissu technique léger pour un confort optimal en mouvement.",
+    prix: 9500, prixPromo: null, stock: 16, sku: "AD-DB-006",
+    images: [{ id: 1406, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-bleu-gris.png`, alt: "Débardeur Adidas bleu-gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 34, nom: "Débardeur Adidas Techfit Noir", slug: "debardeur-adidas-techfit-noir",
+    description: "Débardeur Adidas Techfit noir, coupe ajustée près du corps. Conçu pour la musculation, maintien optimal pendant l'effort.",
+    prix: 9500, prixPromo: null, stock: 22, sku: "AD-DB-007",
+    images: [{ id: 1407, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-techfit-noir.png`, alt: "Débardeur Adidas Techfit noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 35, nom: "Débardeur Adidas Marine", slug: "debardeur-adidas-marine",
+    description: "Débardeur Adidas bleu marine sans manches. Tissu respirant, coupe classique pour le sport au quotidien.",
+    prix: 9000, prixPromo: null, stock: 11, sku: "AD-DB-008",
+    images: [{ id: 1408, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-marine.png`, alt: "Débardeur Adidas marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 36, nom: "Débardeur Adidas Bleu-Gris II", slug: "debardeur-adidas-bleu-gris-2",
+    description: "Variante du débardeur Adidas bleu-gris, finitions marine sur les épaules. Tissu léger et résistant.",
+    prix: 9500, prixPromo: null, stock: 19, sku: "AD-DB-009",
+    images: [{ id: 1409, url: `${ADIDAS_IMG_BASE}/Debardeurs/adidas-debardeur-bleu-gris-2.png`, alt: "Débardeur Adidas bleu-gris variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+
+  // --- Adidas — T-shirts ---
+  {
+    id: 37, nom: "T-shirt Adidas Noir", slug: "tshirt-adidas-noir",
+    description: "T-shirt Adidas noir manches courtes, tissu technique respirant. Coupe sport polyvalente pour l'entraînement et le quotidien.",
+    prix: 9500, prixPromo: null, stock: 20, sku: "AD-TS-001",
+    images: [{ id: 1501, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-noir.png`, alt: "T-shirt Adidas noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: true, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 38, nom: "T-shirt Adidas Camo Vert", slug: "tshirt-adidas-camo-vert",
+    description: "T-shirt Adidas motif camouflage vert kaki. Tissu doux, look streetwear pour le sport comme le quotidien.",
+    prix: 10500, prixPromo: null, stock: 15, sku: "AD-TS-002",
+    images: [{ id: 1502, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-camo-vert.png`, alt: "T-shirt Adidas camouflage vert" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 39, nom: "T-shirt Adidas Chiné Gris", slug: "tshirt-adidas-chine-gris",
+    description: "T-shirt Adidas chiné gris clair, manches courtes. Tissu doux et léger pour un confort toute la journée.",
+    prix: 10000, prixPromo: null, stock: 12, sku: "AD-TS-003",
+    images: [{ id: 1503, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-chine-gris.png`, alt: "T-shirt Adidas chiné gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 40, nom: "T-shirt Adidas Gris", slug: "tshirt-adidas-gris",
+    description: "T-shirt Adidas gris technique avec micro-perforations. Évacuation de l'humidité, idéal pour la course et le cardio.",
+    prix: 9500, prixPromo: null, stock: 24, sku: "AD-TS-004",
+    images: [{ id: 1504, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-gris.png`, alt: "T-shirt Adidas gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 41, nom: "T-shirt Adidas Blanc", slug: "tshirt-adidas-blanc",
+    description: "T-shirt Adidas blanc manches courtes, finitions discrètes. Tissu léger et respirant pour l'entraînement par temps chaud.",
+    prix: 9500, prixPromo: null, stock: 9, sku: "AD-TS-005",
+    images: [{ id: 1505, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-blanc.png`, alt: "T-shirt Adidas blanc" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 42, nom: "T-shirt Adidas Noir II", slug: "tshirt-adidas-noir-2",
+    description: "Variante du t-shirt Adidas noir, bandes blanches latérales. Tissu technique respirant pour l'entraînement intensif.",
+    prix: 9500, prixPromo: null, stock: 17, sku: "AD-TS-006",
+    images: [{ id: 1506, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-noir-2.png`, alt: "T-shirt Adidas noir variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 43, nom: "T-shirt Adidas Sauge", slug: "tshirt-adidas-sauge",
+    description: "T-shirt Adidas vert sauge, coupe raglan. Coloris doux et original, tissu confortable pour un usage quotidien.",
+    prix: 10000, prixPromo: null, stock: 13, sku: "AD-TS-007",
+    images: [{ id: 1507, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-sauge.png`, alt: "T-shirt Adidas sauge" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 44, nom: "T-shirt Adidas Noir III", slug: "tshirt-adidas-noir-3",
+    description: "T-shirt Adidas noir manches raglan, bandes blanches sur le côté. Tissu respirant, coupe sport classique.",
+    prix: 9500, prixPromo: null, stock: 21, sku: "AD-TS-008",
+    images: [{ id: 1508, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-noir-3.png`, alt: "T-shirt Adidas noir variante 3" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 45, nom: "T-shirt Adidas Gris II", slug: "tshirt-adidas-gris-2",
+    description: "T-shirt Adidas gris chiné, manches courtes raglan. Tissu doux et léger pour l'entraînement comme le quotidien.",
+    prix: 9500, prixPromo: null, stock: 10, sku: "AD-TS-009",
+    images: [{ id: 1509, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-gris-2.png`, alt: "T-shirt Adidas gris variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 46, nom: "T-shirt Adidas Bleu Canard", slug: "tshirt-adidas-bleu-canard",
+    description: "T-shirt Adidas bleu canard, coupe raglan classique. Coloris affirmé, tissu confortable pour un usage quotidien.",
+    prix: 11000, prixPromo: null, stock: 18, sku: "AD-TS-010",
+    images: [{ id: 1510, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-bleu-canard.png`, alt: "T-shirt Adidas bleu canard" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 47, nom: "T-shirt Adidas Marine", slug: "tshirt-adidas-marine",
+    description: "T-shirt Adidas bleu marine manches courtes. Tissu technique respirant, coupe sport pour l'entraînement.",
+    prix: 10500, prixPromo: null, stock: 14, sku: "AD-TS-011",
+    images: [{ id: 1511, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-marine.png`, alt: "T-shirt Adidas marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 48, nom: "T-shirt Adidas Terrex Blanc", slug: "tshirt-adidas-terrex-blanc",
+    description: "T-shirt Adidas Terrex blanc, tissu technique outdoor. Léger et respirant, conçu pour la randonnée et les activités de plein air.",
+    prix: 12000, prixPromo: 10000, stock: 16, sku: "AD-TS-012",
+    images: [{ id: 1512, url: `${ADIDAS_IMG_BASE}/Tshirts/adidas-tshirt-terrex-blanc.png`, alt: "T-shirt Adidas Terrex blanc" }],
+    categorie: CAT_FITNESS, marque: BRAND_ADIDAS, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+
+  // --- Nike — Shorts ---
+  {
+    id: 49, nom: "Short Nike Noir", slug: "short-nike-noir",
+    description: "Short Nike noir, taille élastique à cordon, poches latérales. Coupe sport classique pour l'entraînement comme le quotidien.",
+    prix: 12000, prixPromo: null, stock: 18, sku: "NK-SH-001",
+    images: [{ id: 2001, url: `${NIKE_IMG_BASE}/Shorts/nike-short-noir.png`, alt: "Short Nike noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: true, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 50, nom: "Short Nike Zip Gris", slug: "short-nike-zip-gris",
+    description: "Short Nike gris avec poche zippée sécurisée. Tissu technique léger, idéal pour la salle ou la course.",
+    prix: 13000, prixPromo: null, stock: 14, sku: "NK-SH-002",
+    images: [{ id: 2002, url: `${NIKE_IMG_BASE}/Shorts/nike-short-zip-gris.png`, alt: "Short Nike zip gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 51, nom: "Short Nike Rose Pâle", slug: "short-nike-rose-pale",
+    description: "Short Nike rose pâle, coupe ample et légère. Tissu doux et respirant, parfait pour l'entraînement par temps chaud.",
+    prix: 12500, prixPromo: null, stock: 11, sku: "NK-SH-003",
+    images: [{ id: 2003, url: `${NIKE_IMG_BASE}/Shorts/nike-short-rose-pale.png`, alt: "Short Nike rose pâle" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 52, nom: "Short Nike Chiné Anthracite", slug: "short-nike-chine-anthracite",
+    description: "Short Nike chiné anthracite, tissu molletonné doux. Coupe confortable pour la récupération ou l'entraînement léger.",
+    prix: 13000, prixPromo: null, stock: 20, sku: "NK-SH-004",
+    images: [{ id: 2004, url: `${NIKE_IMG_BASE}/Shorts/nike-short-chine-anthracite.png`, alt: "Short Nike chiné anthracite" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 53, nom: "Short Nike Chiné Liseré Vert", slug: "short-nike-chine-listere-vert",
+    description: "Short Nike chiné gris avec liseré vert fluo. Tissu molletonné doux, look sport actuel.",
+    prix: 13500, prixPromo: null, stock: 9, sku: "NK-SH-005",
+    images: [{ id: 2005, url: `${NIKE_IMG_BASE}/Shorts/nike-short-chine-listere-vert.png`, alt: "Short Nike chiné liseré vert" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 54, nom: "Short Nike Chiné Foncé", slug: "short-nike-chine-fonce",
+    description: "Short Nike chiné gris foncé, tissu molletonné. Coupe décontractée, confortable pour le sport comme le quotidien.",
+    prix: 13000, prixPromo: null, stock: 16, sku: "NK-SH-006",
+    images: [{ id: 2006, url: `${NIKE_IMG_BASE}/Shorts/nike-short-chine-fonce.png`, alt: "Short Nike chiné foncé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 55, nom: "Short Nike Noir II", slug: "short-nike-noir-2",
+    description: "Short Nike noir, finitions techniques sur le côté. Tissu respirant, coupe sport pour l'entraînement intensif.",
+    prix: 12500, prixPromo: null, stock: 13, sku: "NK-SH-007",
+    images: [{ id: 2007, url: `${NIKE_IMG_BASE}/Shorts/nike-short-noir-2.png`, alt: "Short Nike noir variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 56, nom: "Short Nike Moutarde", slug: "short-nike-moutarde",
+    description: "Short Nike moutarde, finitions techniques contrastées. Coloris affirmé, tissu résistant pour l'entraînement extérieur.",
+    prix: 14000, prixPromo: null, stock: 10, sku: "NK-SH-008",
+    images: [{ id: 2008, url: `${NIKE_IMG_BASE}/Shorts/nike-short-moutarde.png`, alt: "Short Nike moutarde" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 57, nom: "Short Nike Orange", slug: "short-nike-orange",
+    description: "Short Nike orange, finitions techniques contrastées. Coloris vif, tissu résistant pour l'entraînement extérieur.",
+    prix: 14000, prixPromo: null, stock: 12, sku: "NK-SH-009",
+    images: [{ id: 2009, url: `${NIKE_IMG_BASE}/Shorts/nike-short-orange.png`, alt: "Short Nike orange" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 58, nom: "Short Nike Rose Poches", slug: "short-nike-rose-poches",
+    description: "Short Nike rose avec poches zippées et cordon de serrage. Coupe confortable, tissu doux pour un usage quotidien.",
+    prix: 12500, prixPromo: null, stock: 17, sku: "NK-SH-010",
+    images: [{ id: 2010, url: `${NIKE_IMG_BASE}/Shorts/nike-short-rose-poches.png`, alt: "Short Nike rose poches" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 59, nom: "Short Nike Rouge", slug: "short-nike-rouge",
+    description: "Short Nike rouge, taille élastique à cordon noir. Coupe sport classique, tissu léger et résistant.",
+    prix: 12000, prixPromo: null, stock: 22, sku: "NK-SH-011",
+    images: [{ id: 2011, url: `${NIKE_IMG_BASE}/Shorts/nike-short-rouge.png`, alt: "Short Nike rouge" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 60, nom: "Short Nike Lavande Zip", slug: "short-nike-lavande-zip",
+    description: "Short Nike lavande avec poche zippée technique. Coloris original, tissu confortable pour l'entraînement quotidien.",
+    prix: 13500, prixPromo: null, stock: 8, sku: "NK-SH-012",
+    images: [{ id: 2012, url: `${NIKE_IMG_BASE}/Shorts/nike-short-lavande-zip.png`, alt: "Short Nike lavande zip" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 61, nom: "Short Nike Pro Rouge", slug: "short-nike-pro-rouge",
+    description: "Short Nike Pro rouge, coupe ajustée technique. Conçu pour l'entraînement intensif, maintien et liberté de mouvement.",
+    prix: 14500, prixPromo: null, stock: 15, sku: "NK-SH-013",
+    images: [{ id: 2013, url: `${NIKE_IMG_BASE}/Shorts/nike-short-rouge-pro.png`, alt: "Short Nike Pro rouge" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 62, nom: "Short Nike Pro Noir", slug: "short-nike-pro-noir",
+    description: "Short Nike Pro noir, coupe ajustée technique. Conçu pour l'entraînement intensif, maintien et liberté de mouvement.",
+    prix: 14500, prixPromo: 12500, stock: 19, sku: "NK-SH-014",
+    images: [{ id: 2014, url: `${NIKE_IMG_BASE}/Shorts/nike-short-noir-pro.png`, alt: "Short Nike Pro noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 63, nom: "Short Nike Zip Gris II", slug: "short-nike-zip-gris-2",
+    description: "Short Nike gris avec poche zippée et finitions techniques. Tissu léger, coupe polyvalente pour le sport ou le quotidien.",
+    prix: 13000, prixPromo: null, stock: 11, sku: "NK-SH-015",
+    images: [{ id: 2015, url: `${NIKE_IMG_BASE}/Shorts/nike-short-zip-gris-2.png`, alt: "Short Nike zip gris variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 64, nom: "Short Nike Zip Menthe", slug: "short-nike-zip-menthe",
+    description: "Short Nike vert menthe avec poche zippée technique. Coloris frais, tissu doux et respirant.",
+    prix: 13500, prixPromo: null, stock: 14, sku: "NK-SH-016",
+    images: [{ id: 2016, url: `${NIKE_IMG_BASE}/Shorts/nike-short-zip-menthe.png`, alt: "Short Nike zip menthe" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_SHORT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+
+  // --- Nike — Débardeurs ---
+  {
+    id: 65, nom: "Débardeur Nike Bleu", slug: "debardeur-nike-bleu",
+    description: "Débardeur Nike bleu sans manches, tissu technique respirant. Idéal pour l'entraînement intense et les fortes chaleurs.",
+    prix: 9000, prixPromo: null, stock: 21, sku: "NK-DB-001",
+    images: [{ id: 2101, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-bleu.png`, alt: "Débardeur Nike bleu" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: true, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 66, nom: "Débardeur Nike Blanc", slug: "debardeur-nike-blanc",
+    description: "Débardeur Nike blanc sans manches, coupe athlétique. Tissu léger qui évacue la transpiration pendant l'effort.",
+    prix: 8500, prixPromo: null, stock: 16, sku: "NK-DB-002",
+    images: [{ id: 2102, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-blanc.png`, alt: "Débardeur Nike blanc" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 67, nom: "Débardeur Nike Noir", slug: "debardeur-nike-noir",
+    description: "Débardeur Nike noir sans manches, design épuré. Tissu doux et résistant, idéal pour l'entraînement quotidien.",
+    prix: 8500, prixPromo: null, stock: 19, sku: "NK-DB-003",
+    images: [{ id: 2103, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-noir.png`, alt: "Débardeur Nike noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 68, nom: "Débardeur Nike Bleu II", slug: "debardeur-nike-bleu-2",
+    description: "Variante du débardeur Nike bleu, tissu technique léger. Confort optimal en mouvement pendant l'effort.",
+    prix: 9000, prixPromo: null, stock: 13, sku: "NK-DB-004",
+    images: [{ id: 2104, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-bleu-2.png`, alt: "Débardeur Nike bleu variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 69, nom: "Débardeur Nike Blanc II", slug: "debardeur-nike-blanc-2",
+    description: "Débardeur Nike blanc sans manches, finitions rouges discrètes. Tissu respirant pour l'entraînement quotidien.",
+    prix: 8500, prixPromo: null, stock: 10, sku: "NK-DB-005",
+    images: [{ id: 2105, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-blanc-2.png`, alt: "Débardeur Nike blanc variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 70, nom: "Débardeur Nike Bleu Canard", slug: "debardeur-nike-bleu-canard",
+    description: "Débardeur Nike bleu canard sans manches. Coloris affirmé, tissu technique respirant pour l'entraînement.",
+    prix: 9500, prixPromo: null, stock: 15, sku: "NK-DB-006",
+    images: [{ id: 2106, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-bleu-canard.png`, alt: "Débardeur Nike bleu canard" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 71, nom: "Débardeur Nike Gris", slug: "debardeur-nike-gris",
+    description: "Débardeur Nike gris sans manches, coupe athlétique. Tissu léger et respirant pour le sport au quotidien.",
+    prix: 8500, prixPromo: null, stock: 18, sku: "NK-DB-007",
+    images: [{ id: 2107, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-gris.png`, alt: "Débardeur Nike gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 72, nom: "Débardeur Nike Bleu III", slug: "debardeur-nike-bleu-3",
+    description: "Débardeur Nike bleu sans manches, coupe sport classique. Tissu technique évacuant la transpiration.",
+    prix: 9000, prixPromo: null, stock: 12, sku: "NK-DB-008",
+    images: [{ id: 2108, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-bleu-3.png`, alt: "Débardeur Nike bleu variante 3" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 73, nom: "Débardeur Nike Blanc Perforé", slug: "debardeur-nike-blanc-perfore",
+    description: "Débardeur Nike blanc avec perforations latérales pour une meilleure ventilation. Coupe athlétique technique.",
+    prix: 9500, prixPromo: null, stock: 9, sku: "NK-DB-009",
+    images: [{ id: 2109, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-blanc-perfore.png`, alt: "Débardeur Nike blanc perforé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 74, nom: "Débardeur Nike Gris Clair Perforé", slug: "debardeur-nike-gris-clair-perfore",
+    description: "Débardeur Nike gris clair avec perforations latérales techniques. Ventilation optimale pendant l'effort.",
+    prix: 9500, prixPromo: null, stock: 14, sku: "NK-DB-010",
+    images: [{ id: 2110, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-gris-clair-perfore.png`, alt: "Débardeur Nike gris clair perforé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 75, nom: "Débardeur Nike Kaki Perforé", slug: "debardeur-nike-kaki-perfore",
+    description: "Débardeur Nike kaki avec perforations latérales techniques. Coloris militaire, ventilation optimale à l'effort.",
+    prix: 9500, prixPromo: null, stock: 17, sku: "NK-DB-011",
+    images: [{ id: 2111, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-kaki-perfore.png`, alt: "Débardeur Nike kaki perforé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 76, nom: "Débardeur Nike Bleu IV", slug: "debardeur-nike-bleu-4",
+    description: "Débardeur Nike bleu sans manches, coupe classique. Tissu technique léger pour le sport au quotidien.",
+    prix: 9000, prixPromo: null, stock: 11, sku: "NK-DB-012",
+    images: [{ id: 2112, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-bleu-4.png`, alt: "Débardeur Nike bleu variante 4" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 77, nom: "Débardeur Nike Noir II", slug: "debardeur-nike-noir-2",
+    description: "Débardeur Nike noir sans manches, coupe sport classique. Tissu respirant pour l'entraînement intensif.",
+    prix: 8500, prixPromo: null, stock: 20, sku: "NK-DB-013",
+    images: [{ id: 2113, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-noir-2.png`, alt: "Débardeur Nike noir variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 78, nom: "Débardeur Nike Blanc III", slug: "debardeur-nike-blanc-3",
+    description: "Débardeur Nike blanc sans manches, design épuré. Tissu léger et résistant pour un usage quotidien.",
+    prix: 8500, prixPromo: null, stock: 16, sku: "NK-DB-014",
+    images: [{ id: 2114, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-blanc-3.png`, alt: "Débardeur Nike blanc variante 3" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 79, nom: "Débardeur Nike Rouge", slug: "debardeur-nike-rouge",
+    description: "Débardeur Nike rouge sans manches, coloris vif. Tissu technique respirant pour l'entraînement intensif.",
+    prix: 9000, prixPromo: null, stock: 13, sku: "NK-DB-015",
+    images: [{ id: 2115, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-rouge.png`, alt: "Débardeur Nike rouge" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 80, nom: "Débardeur Nike Marine", slug: "debardeur-nike-marine",
+    description: "Débardeur Nike bleu marine sans manches. Tissu respirant, coupe classique pour le sport au quotidien.",
+    prix: 9000, prixPromo: null, stock: 18, sku: "NK-DB-016",
+    images: [{ id: 2116, url: `${NIKE_IMG_BASE}/Debardeurs/nike-debardeur-marine.png`, alt: "Débardeur Nike marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_DEBARDEUR, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+
+  // --- Nike — T-shirts ---
+  {
+    id: 81, nom: "T-shirt Nike Blanc", slug: "tshirt-nike-blanc",
+    description: "T-shirt Nike blanc manches courtes, tissu technique respirant. Coupe sport polyvalente pour l'entraînement et le quotidien.",
+    prix: 9500, prixPromo: null, stock: 22, sku: "NK-TS-001",
+    images: [{ id: 2201, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-blanc.png`, alt: "T-shirt Nike blanc" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: true, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 82, nom: "T-shirt Nike Kaki Texturé", slug: "tshirt-nike-kaki-texture",
+    description: "T-shirt Nike vert kaki avec motif texturé. Look streetwear, tissu doux pour le sport comme le quotidien.",
+    prix: 10500, prixPromo: null, stock: 14, sku: "NK-TS-002",
+    images: [{ id: 2202, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-kaki-texture.png`, alt: "T-shirt Nike kaki texturé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 83, nom: "T-shirt Nike Noir", slug: "tshirt-nike-noir",
+    description: "T-shirt Nike noir manches courtes, finitions discrètes sur les manches. Tissu respirant pour l'entraînement.",
+    prix: 9500, prixPromo: null, stock: 19, sku: "NK-TS-003",
+    images: [{ id: 2203, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-noir.png`, alt: "T-shirt Nike noir" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 84, nom: "T-shirt Nike Chiné Gris", slug: "tshirt-nike-chine-gris",
+    description: "T-shirt Nike chiné gris clair, manches courtes. Tissu doux et léger pour un confort toute la journée.",
+    prix: 10000, prixPromo: null, stock: 11, sku: "NK-TS-004",
+    images: [{ id: 2204, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-chine-gris.png`, alt: "T-shirt Nike chiné gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 85, nom: "T-shirt Nike Gris", slug: "tshirt-nike-gris",
+    description: "T-shirt Nike gris technique, manches raglan. Évacuation de l'humidité, idéal pour la course et le cardio.",
+    prix: 9500, prixPromo: null, stock: 16, sku: "NK-TS-005",
+    images: [{ id: 2205, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-gris.png`, alt: "T-shirt Nike gris" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 86, nom: "T-shirt Nike Marine", slug: "tshirt-nike-marine",
+    description: "T-shirt Nike bleu marine manches courtes. Tissu technique respirant, coupe sport pour l'entraînement.",
+    prix: 10500, prixPromo: null, stock: 12, sku: "NK-TS-006",
+    images: [{ id: 2206, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-marine.png`, alt: "T-shirt Nike marine" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 87, nom: "T-shirt Nike Noir II", slug: "tshirt-nike-noir-2",
+    description: "T-shirt Nike noir manches courtes, finitions techniques sur la manche. Tissu respirant pour l'entraînement intensif.",
+    prix: 9500, prixPromo: null, stock: 20, sku: "NK-TS-007",
+    images: [{ id: 2207, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-noir-2.png`, alt: "T-shirt Nike noir variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 88, nom: "T-shirt Nike Blanc II", slug: "tshirt-nike-blanc-2",
+    description: "T-shirt Nike blanc manches courtes, finitions techniques sur la manche. Tissu léger et respirant.",
+    prix: 9500, prixPromo: null, stock: 15, sku: "NK-TS-008",
+    images: [{ id: 2208, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-blanc-2.png`, alt: "T-shirt Nike blanc variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 89, nom: "T-shirt Nike Marine Texturé", slug: "tshirt-nike-marine-texture",
+    description: "T-shirt Nike bleu marine avec motif texturé subtil. Coupe sport, tissu doux pour un usage quotidien.",
+    prix: 10500, prixPromo: null, stock: 9, sku: "NK-TS-009",
+    images: [{ id: 2209, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-marine-texture.png`, alt: "T-shirt Nike marine texturé" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 90, nom: "T-shirt Nike Blanc III", slug: "tshirt-nike-blanc-3",
+    description: "T-shirt Nike blanc manches courtes, coupe sport classique. Tissu léger et respirant pour l'entraînement.",
+    prix: 9500, prixPromo: null, stock: 17, sku: "NK-TS-010",
+    images: [{ id: 2210, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-blanc-3.png`, alt: "T-shirt Nike blanc variante 3" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 91, nom: "T-shirt Nike Noir III", slug: "tshirt-nike-noir-3",
+    description: "T-shirt Nike noir manches courtes, coupe sport classique. Tissu technique respirant.",
+    prix: 9500, prixPromo: null, stock: 13, sku: "NK-TS-011",
+    images: [{ id: 2211, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-noir-3.png`, alt: "T-shirt Nike noir variante 3" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 92, nom: "T-shirt Nike Marine II", slug: "tshirt-nike-marine-2",
+    description: "T-shirt Nike bleu marine manches raglan, logo brodé rouge. Tissu technique respirant pour l'entraînement.",
+    prix: 10500, prixPromo: null, stock: 10, sku: "NK-TS-012",
+    images: [{ id: 2212, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-marine-2.png`, alt: "T-shirt Nike marine variante" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 93, nom: "T-shirt Nike Noir Chiné", slug: "tshirt-nike-noir-chine",
+    description: "T-shirt Nike noir chiné, manches raglan, logo brodé rouge. Tissu doux et résistant pour un usage quotidien.",
+    prix: 10000, prixPromo: null, stock: 14, sku: "NK-TS-013",
+    images: [{ id: 2213, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-noir-chine.png`, alt: "T-shirt Nike noir chiné" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
+  },
+  {
+    id: 94, nom: "T-shirt Nike Gris Lavande", slug: "tshirt-nike-gris-lavande",
+    description: "T-shirt Nike gris lavande, logo Nike rouge et blanc. Tissu doux et léger pour l'entraînement comme le quotidien.",
+    prix: 9500, prixPromo: 8500, stock: 16, sku: "NK-TS-014",
+    images: [{ id: 2214, url: `${NIKE_IMG_BASE}/Tshirts/nike-tshirt-gris-lavande.png`, alt: "T-shirt Nike gris lavande" }],
+    categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
+    createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
   },
 ];
 
@@ -163,72 +816,5 @@ export const MOCK_CATEGORIES: Category[] = [
 ];
 
 export const MOCK_BRANDS: Brand[] = [
-  BRAND_VELOCE, BRAND_FORZA, BRAND_PULSE, BRAND_KINETIK,
-  BRAND_APEX, BRAND_STRIDE, BRAND_FLEXA, BRAND_STRATOS,
+  BRAND_NIKE, BRAND_ADIDAS, BRAND_UNDER_ARMOUR,
 ];
-
-export function getMockProductsResponse(filters: {
-  search?: string;
-  categorie?: string;
-  marque?: string;
-  prixMin?: number;
-  prixMax?: number;
-  disponible?: boolean;
-  sort?: string;
-  page?: number;
-  pageSize?: number;
-}): StrapiListResponse<Product> {
-  let results = [...MOCK_PRODUCTS];
-
-  if (filters.search) {
-    const q = filters.search.toLowerCase();
-    results = results.filter(
-      (p) =>
-        p.nom.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q)
-    );
-  }
-  if (filters.categorie) {
-    results = results.filter((p) => p.categorie.slug === filters.categorie);
-  }
-  if (filters.marque) {
-    results = results.filter((p) =>
-      p.marque.nom.toLowerCase().includes(filters.marque!.toLowerCase())
-    );
-  }
-  if (filters.prixMin !== undefined) {
-    results = results.filter((p) => (p.prixPromo ?? p.prix) >= filters.prixMin!);
-  }
-  if (filters.prixMax !== undefined) {
-    results = results.filter((p) => (p.prixPromo ?? p.prix) <= filters.prixMax!);
-  }
-  if (filters.disponible !== undefined) {
-    results = results.filter((p) => p.disponible === filters.disponible);
-  }
-
-  switch (filters.sort) {
-    case "prix:asc":
-      results.sort((a, b) => (a.prixPromo ?? a.prix) - (b.prixPromo ?? b.prix));
-      break;
-    case "prix:desc":
-      results.sort((a, b) => (b.prixPromo ?? b.prix) - (a.prixPromo ?? a.prix));
-      break;
-    case "nom:asc":
-      results.sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
-      break;
-    default:
-      results.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-  }
-
-  const page = filters.page ?? 1;
-  const pageSize = filters.pageSize ?? 12;
-  const total = results.length;
-  const pageCount = Math.ceil(total / pageSize);
-  const start = (page - 1) * pageSize;
-  const data = results.slice(start, start + pageSize);
-
-  return { data, meta: { pagination: { page, pageSize, pageCount, total } } };
-}

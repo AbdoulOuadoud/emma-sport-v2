@@ -2,28 +2,29 @@
 
 /* ============================================================
    EMMA SPORT — Design System
-   Énergique & sportif · clair · orange #FF6B00
-   Display: Oswald (condensé) · Texte: Archivo
+   Vert fluo #64F64D · Noir charbon #181818 · Blanc #F1F1F1
+   Display: Barlow Condensed · Texte: Nunito
+   Charte officielle Emma Sports (Logobook Pilomark 26/08/25)
 ============================================================ */
 
 :root {
-  --orange: #FF6B00;
-  --orange-600: #E85F00;
-  --orange-tint: #FFF1E6;
+  --orange: #64F64D;      /* vert fluo — Energie et Performance */
+  --orange-600: #4ACC37;  /* vert foncé hover */
+  --orange-tint: #EDFCE9; /* vert très clair */
 
-  --ink: #0E0E0E;
-  --ink-soft: #1C1C1A;
+  --ink: #181818;         /* noir charbon — Rigueur et ambition */
+  --ink-soft: #242424;
   --white: #FFFFFF;
-  --paper: #FBFBF9;
-  --gray-50: #F6F6F3;
-  --gray-100: #F0F0EC;
-  --gray-200: #E4E4DE;
-  --gray-300: #D2D2CA;
-  --gray-500: #8C8C84;
-  --muted: #6A6A62;
+  --paper: #F1F1F1;       /* blanc — Clarté et équilibre */
+  --gray-50: #EBEBEB;
+  --gray-100: #E2E2E2;
+  --gray-200: #D0D0D0;
+  --gray-300: #B8B8B8;
+  --gray-500: #888888;
+  --muted: #666666;
 
-  --font-display: "Oswald", "Arial Narrow", sans-serif;
-  --font-body: "Archivo", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
 
   --maxw: 1280px;
   --pad: clamp(20px, 5vw, 64px);
@@ -191,7 +192,7 @@ button { font-family: inherit; cursor: pointer; }
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(251,251,249,.86);
+  background: rgba(241,241,241,.86);
   backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid transparent;
   transition: border-color .3s, box-shadow .3s, background .3s;
@@ -547,16 +548,16 @@ button { font-family: inherit; cursor: pointer; }
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,107,0,.55); }
-  70% { box-shadow: 0 0 0 10px rgba(255,107,0,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,107,0,0); }
+  0% { box-shadow: 0 0 0 0 rgba(100,246,77,.6); }
+  70% { box-shadow: 0 0 0 10px rgba(100,246,77,0); }
+  100% { box-shadow: 0 0 0 0 rgba(100,246,77,0); }
 }
 @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
 .hero-tag {
   position: absolute;
   bottom: 20px; left: 20px;
-  background: rgba(251,251,249,.92);
+  background: rgba(241,241,241,.92);
   backdrop-filter: blur(6px);
   border-radius: var(--radius);
   padding: 12px 16px;
@@ -569,52 +570,6 @@ button { font-family: inherit; cursor: pointer; }
   .hero-visual { aspect-ratio: 3/3.4; max-width: 460px; }
   .hero .ghost { font-size: 60vw; opacity: .04; top: 30%; }
 }
-
-/* ============================================================
-   BRAND MARQUEE
-============================================================ */
-.brands {
-  border-block: 1px solid var(--gray-200);
-  background: var(--white);
-  padding-block: 26px;
-  overflow: hidden;
-}
-.brands .label {
-  text-align: center;
-  font-size: .72rem;
-  text-transform: uppercase;
-  letter-spacing: .2em;
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-.marquee {
-  display: flex;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee .track {
-  display: flex;
-  gap: clamp(40px, 6vw, 80px);
-  padding-right: clamp(40px, 6vw, 80px);
-  animation: scroll 30s linear infinite;
-  flex: none;
-}
-.marquee:hover .track { animation-play-state: paused; }
-@keyframes scroll { to { transform: translateX(-50%); } }
-.brand-mark {
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  letter-spacing: .04em;
-  color: var(--gray-300);
-  white-space: nowrap;
-  transition: color .25s;
-  display: flex; align-items: center; gap: 8px;
-}
-.brand-mark:hover { color: var(--ink); }
-.brand-mark .d { width: 9px; height: 9px; background: currentColor; border-radius: 50%; flex: none; }
 
 /* ============================================================
    PRODUCT CARDS / FEATURED
@@ -696,7 +651,7 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 2;
   width: 38px; height: 38px;
   border-radius: 50%;
-  background: rgba(251,251,249,.9);
+  background: rgba(241,241,241,.9);
   border: none;
   display: grid; place-items: center;
   opacity: 0;
@@ -1056,7 +1011,7 @@ button { font-family: inherit; cursor: pointer; }
   outline: none;
   border-color: var(--orange);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(255,107,0,.1);
+  box-shadow: 0 0 0 3px rgba(100,246,77,.18);
 }
 .search-bar input::placeholder { color: var(--gray-500); }
 
@@ -1498,7 +1453,7 @@ button { font-family: inherit; cursor: pointer; }
 .form-group textarea:focus {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(255,107,0,.12);
+  box-shadow: 0 0 0 3px rgba(100,246,77,.18);
 }
 .form-group textarea { min-height: 120px; resize: vertical; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
