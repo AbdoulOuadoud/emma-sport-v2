@@ -211,25 +211,16 @@ button { font-family: inherit; cursor: pointer; }
 .header.scrolled .wrap { height: 64px; }
 
 .logo {
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
-  gap: 0.4ch;
   line-height: 1;
 }
-.logo .mark {
-  display: inline-block;
-  width: 13px;
-  height: 22px;
-  background: var(--orange);
-  transform: skewX(-12deg);
-  margin-right: 2px;
+.logo img {
+  height: 54px;
+  width: auto;
+  transition: height .3s var(--ease);
 }
-.logo .sport { color: var(--orange); }
+.header.scrolled .logo img { height: 46px; }
 
 .nav {
   display: flex;

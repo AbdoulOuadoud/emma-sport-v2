@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
@@ -75,8 +76,7 @@ export default function Header() {
       <header className={`header${scrolled ? " scrolled" : ""}`}>
         <div className="wrap">
           <Link href="/" className="logo" aria-label="Emma Sport, accueil">
-            <span className="mark" />
-            Emma<span className="sport">Sport</span>
+            <Image src="/logo.png" alt="Emma Sport" width={1536} height={1024} priority />
           </Link>
 
           <nav className="nav">
@@ -128,8 +128,7 @@ export default function Header() {
         <div className="panel">
           <div className="m-top">
             <Link href="/" className="logo" onClick={() => setMenuOpen(false)}>
-              <span className="mark" />
-              Emma<span className="sport">Sport</span>
+              <Image src="/logo.png" alt="Emma Sport" width={1536} height={1024} />
             </Link>
             <button
               className="icon-btn"
