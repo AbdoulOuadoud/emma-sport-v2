@@ -1,4 +1,6 @@
-"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { MOCK_CATEGORIES, MOCK_PRODUCTS } from "@/lib/mock-data";
 
 const ArrowIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
@@ -7,16 +9,19 @@ const ArrowIcon = () => (
   </svg>
 );
 
-const CATEGORIES = [
-  { name: "Football", count: null, delay: "" },
-  { name: "Fitness", count: null, delay: "d1" },
-  { name: "Musculation", count: null, delay: "d2" },
-  { name: "Running", count: null, delay: "d3" },
-  { name: "Trophées & Médailles", count: null, delay: "" },
-  { name: "Tenues d'entraînement", count: null, delay: "d1" },
-  { name: "Chaussures de sport", count: null, delay: "d2" },
-  { name: "Accessoires", count: null, delay: "d3" },
-];
+const DELAYS = ["", "d1", "d2", "d3"];
+
+const CAT_DATA = MOCK_CATEGORIES.map((cat) => {
+  const products = MOCK_PRODUCTS.filter((p) => p.categorie.slug === cat.slug);
+  const withImage = products.find((p) => p.images.length > 0);
+  return {
+    slug: cat.slug,
+    nom: cat.nom,
+    count: products.length,
+    image: withImage?.images[0]?.url ?? null,
+    imageAlt: withImage?.images[0]?.alt ?? cat.nom,
+  };
+}).filter((c) => c.count > 0);
 
 export default function Categories() {
   return (
@@ -38,26 +43,40 @@ export default function Categories() {
         </div>
 
         <div className="grid-cats">
-          {CATEGORIES.map((cat) => (
-            <a
-              key={cat.name}
-              href="#"
-              className={`cat-tile reveal${cat.delay ? ` ${cat.delay}` : ""}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              <div className="ph">
-                <span>{cat.name}</span>
-              </div>
-              <div className="veil" />
-              <div className="arrow">
-                <ArrowIcon />
-              </div>
-              <div className="meta">
-                <div className="h">{cat.name}</div>
-                {cat.count !== null && <div className="c">{cat.count} articles</div>}
-              </div>
-            </a>
-          ))}
+          {CAT_DATA.map((cat, i) => {
+            const delay = DELAYS[i % 4];
+            return (
+              <Link
+                key={cat.slug}
+                href={`/catalogue?categorie=${cat.slug}`}
+                className={`cat-tile reveal${delay ? ` ${delay}` : ""}`}
+              >
+                {cat.image ? (
+                  <Image
+                    src={cat.image}
+                    alt={cat.imageAlt}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 760px) 100vw, (max-width: 1040px) 50vw, 25vw"
+                  />
+                ) : (
+                  <div className="ph">
+                    <span>{cat.nom}</span>
+                  </div>
+                )}
+                <div className="veil" />
+                <div className="arrow">
+                  <ArrowIcon />
+                </div>
+                <div className="meta">
+                  <div className="h">{cat.nom}</div>
+                  <div className="c">
+                    {cat.count} article{cat.count > 1 ? "s" : ""}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

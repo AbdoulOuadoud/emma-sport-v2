@@ -1,43 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { useCart } from "@/contexts/CartContext";
+import { formatPrice, getDiscountPercent } from "@/lib/utils";
 
-type Badge = "vedette" | "promo" | "rupture" | null;
+const VEDETTE = MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible);
 
-interface Product {
-  id: number;
-  cat: string;
-  catLabel: string;
-  brand: string;
-  name: string;
-  price: string;
-  oldPrice?: string;
-  badge: Badge;
-  badgeLabel?: string;
-  init: string;
-  label: string;
-  stars?: string;
-  delay: string;
-}
-
-const PRODUCTS: Product[] = [
-  { id: 1, cat: "running", catLabel: "Running", brand: "Veloce", name: "Velocity Pro", price: "45 000 F CFA", badge: "vedette", init: "V", label: "Chaussure running", stars: "★★★★★", delay: "" },
-  { id: 2, cat: "football", catLabel: "Football", brand: "Forza", name: "Ballon Match Pro", price: "9 000 F CFA", oldPrice: "12 500 F CFA", badge: "promo", badgeLabel: "-28%", init: "F", label: "Ballon football", delay: "d1" },
-  { id: 3, cat: "fitness", catLabel: "Fitness", brand: "Pulse", name: "Tapis Grip+", price: "18 000 F CFA", badge: null, init: "T", label: "Tapis fitness", stars: "★★★★☆", delay: "d2" },
-  { id: 4, cat: "fitness", catLabel: "Musculation", brand: "Kinetik", name: "Haltères 20kg", price: "35 000 F CFA", badge: "vedette", init: "H", label: "Haltères réglables", stars: "★★★★★", delay: "d3" },
-  { id: 5, cat: "basketball", catLabel: "Basketball", brand: "Apex", name: "Maillot Court", price: "12 000 F CFA", badge: null, init: "M", label: "Maillot basket", stars: "★★★★☆", delay: "" },
-  { id: 6, cat: "running", catLabel: "Running", brand: "Stride", name: "Veste Aero Wind", price: "23 000 F CFA", oldPrice: "27 000 F CFA", badge: "promo", badgeLabel: "-15%", init: "A", label: "Veste running", delay: "d1" },
-  { id: 7, cat: "football", catLabel: "Football", brand: "Veloce", name: "Crampons Strike X", price: "32 000 F CFA", badge: "rupture", badgeLabel: "Bientôt", init: "C", label: "Crampons football", stars: "★★★★★", delay: "d2" },
-  { id: 8, cat: "basketball", catLabel: "Basketball", brand: "Apex", name: "Sneakers HighTop", price: "48 000 F CFA", badge: "vedette", init: "S", label: "Sneakers basket", stars: "★★★★★", delay: "d3" },
+const uniqueCats = [
+  ...new Map(VEDETTE.map((p) => [p.categorie.slug, p.categorie])).values(),
 ];
 
 const FILTERS = [
   { key: "all", label: "Tous" },
-  { key: "running", label: "Running" },
-  { key: "football", label: "Football" },
-  { key: "fitness", label: "Fitness" },
-  { key: "basketball", label: "Basketball" },
+  ...uniqueCats.map((c) => ({ key: c.slug, label: c.nom })),
 ];
+
+const DELAYS = ["", "d1", "d2", "d3"];
 
 const HeartIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -48,10 +29,11 @@ const HeartIcon = () => (
 export default function FeaturedProducts() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
-  const [quickFeedback, setQuickFeedback] = useState<Set<number>>(new Set());
+  const [added, setAdded] = useState<Set<number>>(new Set());
+  const { addToCart } = useCart();
 
-  const filtered = PRODUCTS.filter(
-    (p) => activeFilter === "all" || p.cat === activeFilter
+  const filtered = VEDETTE.filter(
+    (p) => activeFilter === "all" || p.categorie.slug === activeFilter
   );
 
   const toggleFav = (e: React.MouseEvent, id: number) => {
@@ -63,13 +45,15 @@ export default function FeaturedProducts() {
     });
   };
 
-  const handleQuick = (e: React.MouseEvent, id: number) => {
+  const handleAdd = (e: React.MouseEvent, product: (typeof VEDETTE)[0]) => {
     e.preventDefault();
-    setQuickFeedback((prev) => new Set(prev).add(id));
+    e.stopPropagation();
+    addToCart(product);
+    setAdded((prev) => new Set(prev).add(product.id));
     setTimeout(() => {
-      setQuickFeedback((prev) => {
+      setAdded((prev) => {
         const next = new Set(prev);
-        next.delete(id);
+        next.delete(product.id);
         return next;
       });
     }, 1100);
@@ -99,52 +83,76 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid-products">
-          {filtered.map((p) => (
-            <a
-              key={p.id}
-              href="#"
-              className={`card reveal${p.delay ? ` ${p.delay}` : ""}`}
-              onClick={(e) => e.preventDefault()}
-            >
-              <div className="media">
-                {p.badge && (
-                  <span className={`badge ${p.badge}`}>
-                    {p.badge === "vedette" ? "Vedette" : p.badge === "rupture" ? "Bientôt" : p.badgeLabel}
-                  </span>
-                )}
-                <button
-                  className={`fav${favorites.has(p.id) ? " on" : ""}`}
-                  aria-label="Ajouter aux favoris"
-                  onClick={(e) => toggleFav(e, p.id)}
-                >
-                  <HeartIcon />
-                </button>
-                <div className="ph" data-init={p.init}>
-                  <span>{p.label}</span>
+          {filtered.map((p, i) => {
+            const price = p.prixPromo ?? p.prix;
+            const discountPct = p.prixPromo
+              ? getDiscountPercent(p.prix, p.prixPromo)
+              : null;
+            const img = p.images[0]?.url ?? null;
+            const delay = DELAYS[i % 4];
+            const isAdded = added.has(p.id);
+
+            const badge = discountPct
+              ? { cls: "promo", label: `-${discountPct}%` }
+              : { cls: "vedette", label: "Vedette" };
+
+            return (
+              <Link
+                key={p.id}
+                href={`/produits/${p.slug}`}
+                className={`card reveal${delay ? ` ${delay}` : ""}`}
+              >
+                <div className="media">
+                  <span className={`badge ${badge.cls}`}>{badge.label}</span>
+                  <button
+                    className={`fav${favorites.has(p.id) ? " on" : ""}`}
+                    aria-label="Ajouter aux favoris"
+                    onClick={(e) => toggleFav(e, p.id)}
+                  >
+                    <HeartIcon />
+                  </button>
+                  {img ? (
+                    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                      <Image
+                        src={img}
+                        alt={p.images[0]?.alt ?? p.nom}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        sizes="(max-width: 760px) 50vw, (max-width: 1040px) 33vw, 25vw"
+                      />
+                    </div>
+                  ) : (
+                    <div className="ph" data-init={p.nom[0]}>
+                      <span>{p.nom}</span>
+                    </div>
+                  )}
+                  <button
+                    className={`quick${isAdded ? " added" : ""}`}
+                    onClick={(e) => handleAdd(e, p)}
+                    aria-label="Ajouter au panier"
+                  >
+                    {isAdded ? "Ajouté !" : "Ajouter au panier"}
+                  </button>
                 </div>
-                <button
-                  className="quick"
-                  style={quickFeedback.has(p.id) ? { background: "var(--orange)" } : undefined}
-                  onClick={(e) => handleQuick(e, p.id)}
-                >
-                  {quickFeedback.has(p.id) ? "Ajouté ✓" : "Aperçu rapide"}
-                </button>
-              </div>
-              <div className="info">
-                <div className="cat">
-                  {p.catLabel} · {p.brand}
+                <div className="info">
+                  <div className="cat">
+                    {p.categorie.nom} · {p.marque.nom}
+                  </div>
+                  <h3 className="name">{p.nom}</h3>
+                  <div className="row">
+                    {p.prixPromo ? (
+                      <>
+                        <span className="price sale">{formatPrice(price)}</span>
+                        <span className="old">{formatPrice(p.prix)}</span>
+                      </>
+                    ) : (
+                      <span className="price">{formatPrice(price)}</span>
+                    )}
+                  </div>
                 </div>
-                <h3 className="name">{p.name}</h3>
-                <div className="row">
-                  <span className={`price${p.oldPrice ? " sale" : ""}`}>
-                    {p.price}
-                  </span>
-                  {p.oldPrice && <span className="old">{p.oldPrice}</span>}
-                  {p.stars && <span className="stars">{p.stars}</span>}
-                </div>
-              </div>
-            </a>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
