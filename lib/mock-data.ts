@@ -8,13 +8,24 @@ const CAT_BASKET: Category = { id: 5, nom: "Basketball", slug: "basketball", ima
 const CAT_JOGGING: Category = { id: 6, nom: "Jogging", slug: "jogging", image: null };
 const CAT_BASKETS: Category = { id: 7, nom: "Baskets", slug: "baskets", image: null };
 const CAT_EQUIPEMENTS: Category = { id: 8, nom: "Équipements", slug: "equipements", image: null };
+const CAT_ACCESSOIRES: Category = { id: 9, nom: "Accessoires", slug: "accessoires", image: null };
 
 const BRAND_NIKE: Brand = { id: 1, nom: "Nike", logo: null };
 const BRAND_ADIDAS: Brand = { id: 2, nom: "Adidas", logo: null };
 const BRAND_UNDER_ARMOUR: Brand = { id: 3, nom: "Under Armour", logo: null };
+const BRAND_VEEDAR: Brand = { id: 4, nom: "Veedar", logo: null };
+const BRAND_EMMA_SPORT: Brand = { id: 5, nom: "Emma Sport", logo: null };
+const BRAND_DERBYSTAR: Brand = { id: 6, nom: "Derbystar", logo: null };
+const BRAND_KIPSTA: Brand = { id: 7, nom: "Kipsta", logo: null };
+const BRAND_MOLTEN: Brand = { id: 8, nom: "Molten", logo: null };
+const BRAND_PUMA: Brand = { id: 9, nom: "Puma", logo: null };
+const BRAND_PRIMERA: Brand = { id: 10, nom: "Primera", logo: null };
 
 const ADIDAS_IMG_BASE = "/articles/Vetements/Adidas";
 const NIKE_IMG_BASE = "/articles/Vetements/Nike";
+const ACCESSOIRES_IMG_BASE = "/articles/Accessoires";
+const BALLONS_IMG_BASE = "/articles/Ballons";
+const CHAUSSURES_IMG_BASE = "/articles/Chaussures/Nike";
 
 const TYPE_SHORT: ArticleType = { slug: "short", nom: "Short" };
 const TYPE_JOGGING: ArticleType = { slug: "jogging", nom: "Jogging" };
@@ -28,11 +39,13 @@ const TYPE_VESTE: ArticleType = { slug: "veste", nom: "Veste" };
 const TYPE_EQUIPEMENT: ArticleType = { slug: "equipement", nom: "Équipement" };
 const TYPE_BALLON: ArticleType = { slug: "ballon", nom: "Ballon" };
 const TYPE_SAC: ArticleType = { slug: "sac", nom: "Sac" };
+const TYPE_GANTS: ArticleType = { slug: "gants", nom: "Gants" };
+const TYPE_PROTECTION: ArticleType = { slug: "protection", nom: "Protection" };
 
 export const ARTICLE_TYPES: ArticleType[] = [
   TYPE_SHORT, TYPE_JOGGING, TYPE_TSHIRT, TYPE_DEBARDEUR, TYPE_CHAUSSETTES,
   TYPE_CHAUSSURES, TYPE_CRAMPONS, TYPE_MAILLOT, TYPE_VESTE, TYPE_EQUIPEMENT,
-  TYPE_BALLON, TYPE_SAC,
+  TYPE_BALLON, TYPE_SAC, TYPE_GANTS, TYPE_PROTECTION,
 ];
 
 export const MOCK_PRODUCTS: Product[] = [
@@ -808,13 +821,579 @@ export const MOCK_PRODUCTS: Product[] = [
     categorie: CAT_FITNESS, marque: BRAND_NIKE, typeArticle: TYPE_TSHIRT, vedette: false, disponible: true,
     createdAt: "2026-06-28T00:00:00.000Z", updatedAt: "2026-06-28T00:00:00.000Z",
   },
+  {
+    id: 95, nom: "Bandes de Résistance Élastiques", slug: "bandes-resistance-elastiques",
+    description: "Set de bandes élastiques de résistance pour renforcement musculaire et étirements. Plusieurs niveaux de tension, idéales pour l'entraînement à domicile ou en salle.",
+    prix: 5500, prixPromo: null, stock: 25, sku: "ACC-015",
+    images: [{ id: 3001, url: `${ACCESSOIRES_IMG_BASE}/bandes-elastiques-resistance.jpeg`, alt: "Bandes de résistance élastiques" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 96, nom: "Brassard de Capitaine", slug: "brassard-capitaine-orange",
+    description: "Brassard de capitaine orange, élastique ajustable. Visible et confortable pour toute la durée du match.",
+    prix: 2500, prixPromo: null, stock: 20, sku: "ACC-016",
+    images: [{ id: 3002, url: `${ACCESSOIRES_IMG_BASE}/brassard-capitaine-orange.jpeg`, alt: "Brassard de capitaine orange" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 97, nom: "Chaussettes de Football Multicolores", slug: "chaussettes-football-multicolores",
+    description: "Chaussettes de football hautes, tissu extensible et respirant, maintien renforcé au niveau du talon et de la voûte plantaire.",
+    prix: 3000, prixPromo: null, stock: 40, sku: "ACC-017",
+    images: [{ id: 3003, url: `${ACCESSOIRES_IMG_BASE}/chaussettes-football-multicolores.jpeg`, alt: "Chaussettes de football multicolores" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_CHAUSSETTES, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 98, nom: "Drapeaux d'Arbitre Assistant", slug: "drapeaux-arbitre-damier",
+    description: "Paire de drapeaux d'arbitre assistant à damier, manche télescopique. Indispensables pour l'arbitrage de touche.",
+    prix: 4000, prixPromo: null, stock: 15, sku: "ACC-018",
+    images: [{ id: 3004, url: `${ACCESSOIRES_IMG_BASE}/drapeaux-arbitre-damier.jpeg`, alt: "Drapeaux d'arbitre à damier" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 99, nom: "Échelle d'Agilité", slug: "echelle-agilite",
+    description: "Échelle d'agilité 8 mètres avec sac de transport et piquets. Idéale pour les exercices de vitesse, de coordination et de footwork.",
+    prix: 9000, prixPromo: null, stock: 12, sku: "ACC-019",
+    images: [{ id: 3005, url: `${ACCESSOIRES_IMG_BASE}/echelle-agilite.jpeg`, alt: "Échelle d'agilité" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 100, nom: "Filet de But Football", slug: "filet-football",
+    description: "Filet de but football, mailles résistantes aux intempéries. Compatible avec les buts standards de club et d'entraînement.",
+    prix: 16000, prixPromo: null, stock: 6, sku: "ACC-020",
+    images: [{ id: 3006, url: `${ACCESSOIRES_IMG_BASE}/filet-football.jpeg`, alt: "Filet de but football" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 101, nom: "Gants de Fitness Veedar Blanc", slug: "gants-fitness-veedar-blanc",
+    description: "Gants de fitness Veedar, paume rembourrée antidérapante, poignet ajustable. Protection et grip optimal pour la musculation.",
+    prix: 6000, prixPromo: null, stock: 18, sku: "VD-GT-001",
+    images: [{ id: 3007, url: `${ACCESSOIRES_IMG_BASE}/gants-fitness-veedar-blanc.jpeg`, alt: "Gants de fitness Veedar blanc" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_VEEDAR, typeArticle: TYPE_GANTS, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 102, nom: "Gants de Fitness Veedar Bleu", slug: "gants-fitness-veedar-bleu",
+    description: "Gants de fitness Veedar, paume rembourrée antidérapante, poignet ajustable. Protection et grip optimal pour la musculation.",
+    prix: 6000, prixPromo: null, stock: 18, sku: "VD-GT-002",
+    images: [{ id: 3008, url: `${ACCESSOIRES_IMG_BASE}/gants-fitness-veedar-bleu.jpeg`, alt: "Gants de fitness Veedar bleu" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_VEEDAR, typeArticle: TYPE_GANTS, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 103, nom: "Gants de Fitness Veedar Rouge", slug: "gants-fitness-veedar-rouge",
+    description: "Gants de fitness Veedar, paume rembourrée antidérapante, poignet ajustable. Protection et grip optimal pour la musculation.",
+    prix: 6000, prixPromo: 5000, stock: 18, sku: "VD-GT-003",
+    images: [{ id: 3009, url: `${ACCESSOIRES_IMG_BASE}/gants-fitness-veedar-rouge.jpeg`, alt: "Gants de fitness Veedar rouge" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_VEEDAR, typeArticle: TYPE_GANTS, vedette: true, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 104, nom: "Manchons de Protection Tibia Nike", slug: "manchon-protection-tibia-nike",
+    description: "Manchons de protection tibia Nike, maintien compressif, compatibles avec la plupart des protège-tibias. Confort et sécurité pour les matchs et entraînements.",
+    prix: 4500, prixPromo: null, stock: 22, sku: "NK-PR-001",
+    images: [{ id: 3010, url: `${ACCESSOIRES_IMG_BASE}/manchon-protection-tibia-nike.jpeg`, alt: "Manchons de protection tibia Nike" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_NIKE, typeArticle: TYPE_PROTECTION, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 105, nom: "Tapis de Yoga", slug: "tapis-yoga",
+    description: "Tapis de yoga antidérapant, épaisseur confortable, facile à enrouler et transporter. Adapté au yoga, à la gym douce et aux étirements.",
+    prix: 12000, prixPromo: null, stock: 16, sku: "ACC-021",
+    images: [{ id: 3011, url: `${ACCESSOIRES_IMG_BASE}/tapis-yoga.jpeg`, alt: "Tapis de yoga" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 106, nom: "Trousse de Premiers Secours", slug: "trousse-premiers-secours",
+    description: "Trousse de premiers secours sport, compacte et complète. Indispensable pour les clubs, équipes et entraîneurs.",
+    prix: 7500, prixPromo: null, stock: 10, sku: "ACC-022",
+    images: [{ id: 3012, url: `${ACCESSOIRES_IMG_BASE}/trousse-premiers-secours.jpeg`, alt: "Trousse de premiers secours" }],
+    categorie: CAT_ACCESSOIRES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_EQUIPEMENT, vedette: false, disponible: true,
+    createdAt: "2026-07-01T00:00:00.000Z", updatedAt: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 107, nom: "Ballon Adidas MLS Speedshell", slug: "ballon-adidas-mls-speedshell",
+    description: "Ballon officiel Adidas MLS Speedshell. Surface thermosoudée pour un vol stable et précis, conçu pour les matchs et l'entraînement intensif.",
+    prix: 22000, prixPromo: null, stock: 14, sku: "AD-BL-001",
+    images: [{ id: 3101, url: `${BALLONS_IMG_BASE}/ballon-adidas-mls-speedshell.jpeg`, alt: "Ballon Adidas MLS Speedshell" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_BALLON, vedette: true, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 108, nom: "Ballon Adidas Tiro Competition FIFA", slug: "ballon-adidas-tiro-competition-fifa",
+    description: "Ballon Adidas Tiro Competition, homologué FIFA Quality Pro. Excellente précision et régularité de rebond pour les rencontres officielles.",
+    prix: 25000, prixPromo: 21000, stock: 10, sku: "AD-BL-002",
+    images: [{ id: 3102, url: `${BALLONS_IMG_BASE}/ballon-adidas-tiro-competition-fifa.jpeg`, alt: "Ballon Adidas Tiro Competition FIFA" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 109, nom: "Ballon Derbystar Bundesliga Bleu", slug: "ballon-derbystar-bundesliga-bleu",
+    description: "Ballon Derbystar réplique Bundesliga, coloris bleu. Structure durable et toucher de balle premium pour un jeu précis.",
+    prix: 19000, prixPromo: null, stock: 11, sku: "DB-BL-001",
+    images: [{ id: 3103, url: `${BALLONS_IMG_BASE}/ballon-derbystar-bundesliga-bleu.jpeg`, alt: "Ballon Derbystar Bundesliga bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_DERBYSTAR, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 110, nom: "Ballon Derbystar Bundesliga Noir", slug: "ballon-derbystar-bundesliga-noir",
+    description: "Ballon Derbystar réplique Bundesliga, coloris noir. Structure durable et toucher de balle premium pour un jeu précis.",
+    prix: 19000, prixPromo: null, stock: 11, sku: "DB-BL-002",
+    images: [{ id: 3104, url: `${BALLONS_IMG_BASE}/ballon-derbystar-bundesliga-noir.jpeg`, alt: "Ballon Derbystar Bundesliga noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_DERBYSTAR, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 111, nom: "Ballon Kipsta F500 Orange", slug: "ballon-kipsta-f500-orange",
+    description: "Ballon Kipsta F500, coloris orange haute visibilité. Bon rapport qualité-prix pour l'entraînement régulier.",
+    prix: 14000, prixPromo: null, stock: 20, sku: "KP-BL-001",
+    images: [{ id: 3105, url: `${BALLONS_IMG_BASE}/ballon-kipsta-f500-orange.jpeg`, alt: "Ballon Kipsta F500 orange" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_KIPSTA, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 112, nom: "Ballon Kipsta Ligue 1 Noir/Orange", slug: "ballon-kipsta-ligue1-noir-orange",
+    description: "Ballon Kipsta réplique Ligue 1, coloris noir et orange. Conçu pour un entraînement intensif et régulier.",
+    prix: 15000, prixPromo: null, stock: 17, sku: "KP-BL-002",
+    images: [{ id: 3106, url: `${BALLONS_IMG_BASE}/ballon-kipsta-ligue1-noir-orange.jpeg`, alt: "Ballon Kipsta Ligue 1 noir et orange" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_KIPSTA, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 113, nom: "Ballon Molten Europa League Bleu", slug: "ballon-molten-europa-league-bleu",
+    description: "Ballon Molten réplique UEFA Europa League, coloris bleu. Panneaux thermosoudés pour un vol régulier et prévisible.",
+    prix: 23000, prixPromo: null, stock: 9, sku: "ML-BL-001",
+    images: [{ id: 3107, url: `${BALLONS_IMG_BASE}/ballon-molten-europa-league-bleu.jpeg`, alt: "Ballon Molten Europa League bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_MOLTEN, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 114, nom: "Ballon Molten Europa League Orange", slug: "ballon-molten-europa-league-orange",
+    description: "Ballon Molten réplique UEFA Europa League, coloris orange haute visibilité. Panneaux thermosoudés pour un vol régulier et prévisible.",
+    prix: 23000, prixPromo: 19500, stock: 9, sku: "ML-BL-002",
+    images: [{ id: 3108, url: `${BALLONS_IMG_BASE}/ballon-molten-europa-league-orange.jpeg`, alt: "Ballon Molten Europa League orange" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_MOLTEN, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 115, nom: "Ballon Primera Fusion", slug: "ballon-primera-fusion",
+    description: "Ballon Primera Fusion, toucher souple et rebond équilibré. Idéal pour les séances d'entraînement club et loisir.",
+    prix: 13000, prixPromo: null, stock: 24, sku: "PM-BL-001",
+    images: [{ id: 3109, url: `${BALLONS_IMG_BASE}/ballon-primera-fusion.jpeg`, alt: "Ballon Primera Fusion" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PRIMERA, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 116, nom: "Ballon Puma CAN Côte d'Ivoire", slug: "ballon-puma-can-cote-divoire",
+    description: "Ballon Puma réplique officielle CAN Côte d'Ivoire. Design aux couleurs de la compétition, structure durable thermosoudée.",
+    prix: 21000, prixPromo: null, stock: 13, sku: "PU-BL-001",
+    images: [{ id: 3110, url: `${BALLONS_IMG_BASE}/ballon-puma-can-cote-divoire.jpeg`, alt: "Ballon Puma CAN Côte d'Ivoire" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_BALLON, vedette: true, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 117, nom: "Ballon Puma CAN Côte d'Ivoire (Variante)", slug: "ballon-puma-can-cote-divoire-2",
+    description: "Ballon Puma réplique officielle CAN Côte d'Ivoire, variante coloris. Design aux couleurs de la compétition, structure durable thermosoudée.",
+    prix: 21000, prixPromo: null, stock: 13, sku: "PU-BL-002",
+    images: [{ id: 3111, url: `${BALLONS_IMG_BASE}/ballon-puma-can-cote-divoire-2.jpeg`, alt: "Ballon Puma CAN Côte d'Ivoire, variante" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+  {
+    id: 118, nom: "Ballon Puma Copa America 2024", slug: "ballon-puma-copa-america-2024",
+    description: "Ballon Puma réplique officielle Copa America 2024. Design collector, panneaux thermosoudés pour un vol stable.",
+    prix: 24000, prixPromo: null, stock: 8, sku: "PU-BL-003",
+    images: [{ id: 3112, url: `${BALLONS_IMG_BASE}/ballon-puma-copa-america-2024.jpeg`, alt: "Ballon Puma Copa America 2024" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_BALLON, vedette: false, disponible: true,
+    createdAt: "2026-07-05T00:00:00.000Z", updatedAt: "2026-07-05T00:00:00.000Z",
+  },
+
+  // ================================================================
+  // CHAUSSURES & CRAMPONS
+  // ================================================================
+
+  // --- Nike Mercurial Vapor — Terrain Naturel (FG) ---
+  {
+    id: 119, nom: "Nike Mercurial Vapor FG Blanc/Cyan/Violet", slug: "nike-mercurial-vapor-fg-blanc-cyan-violet",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Tige Vaporposite ultra-légère, semelle ACC en fibre de carbone pour une vitesse explosive. Coloris Blanc/Cyan/Violet.",
+    prix: 32000, prixPromo: null, stock: 10, sku: "NK-MVF-001",
+    images: [{ id: 4001, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-blanc-cyan-violet.jpeg`, alt: "Nike Mercurial Vapor FG blanc cyan violet" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 120, nom: "Nike Mercurial Vapor FG Blanc/Or", slug: "nike-mercurial-vapor-fg-blanc-or",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Vitesse maximale sur herbe, tige légère et semelle rigide. Coloris Blanc/Or exclusif.",
+    prix: 32000, prixPromo: null, stock: 7, sku: "NK-MVF-002",
+    images: [{ id: 4002, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-blanc-or.jpeg`, alt: "Nike Mercurial Vapor FG blanc or" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 121, nom: "Nike Mercurial Vapor FG Bleu/Jaune", slug: "nike-mercurial-vapor-fg-bleu-jaune",
+    description: "Crampon Nike Mercurial Vapor terrain naturel coloris Bleu/Jaune. Conçu pour les attaquants rapides, retour d'énergie maximal à chaque foulée.",
+    prix: 30000, prixPromo: null, stock: 12, sku: "NK-MVF-003",
+    images: [{ id: 4003, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-bleu-jaune.jpeg`, alt: "Nike Mercurial Vapor FG bleu jaune" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 122, nom: "Nike Mercurial Vapor FG Noir/Orange", slug: "nike-mercurial-vapor-fg-noir-orange",
+    description: "Crampon Nike Mercurial Vapor terrain naturel coloris Noir/Orange. Tige mesh légère, crampon conique pour pivots rapides sur herbe.",
+    prix: 30000, prixPromo: 27000, stock: 9, sku: "NK-MVF-004",
+    images: [{ id: 4004, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-noir-orange.jpeg`, alt: "Nike Mercurial Vapor FG noir orange" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 123, nom: "Nike Mercurial Vapor FG Orange Multicolore", slug: "nike-mercurial-vapor-fg-orange-multicolore",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Coloris Orange Multicolore flamboyant pour se démarquer sur le terrain. Chaussant précis, tige respirante.",
+    prix: 31000, prixPromo: null, stock: 8, sku: "NK-MVF-005",
+    images: [{ id: 4005, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-orange-multicolore.jpeg`, alt: "Nike Mercurial Vapor FG orange multicolore" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 124, nom: "Nike Mercurial Vapor FG Rose Atomknit", slug: "nike-mercurial-vapor-fg-rose-atomknit",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Tige Atomknit ultra-fine pour un toucher de balle précis. Coloris Rose exclusif.",
+    prix: 33000, prixPromo: null, stock: 6, sku: "NK-MVF-006",
+    images: [{ id: 4006, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-rose-atomknit.jpeg`, alt: "Nike Mercurial Vapor FG rose atomknit" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 125, nom: "Nike Mercurial Vapor FG Rose Dégradé", slug: "nike-mercurial-vapor-fg-rose-degrade",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Finition dégradé rose unique, semelle rigide pour une propulsion optimale.",
+    prix: 31000, prixPromo: null, stock: 5, sku: "NK-MVF-007",
+    images: [{ id: 4007, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-rose-degrade.jpeg`, alt: "Nike Mercurial Vapor FG rose dégradé" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 126, nom: "Nike Mercurial Vapor FG Turquoise/Violet", slug: "nike-mercurial-vapor-fg-turquoise-violet",
+    description: "Crampon Nike Mercurial Vapor terrain naturel coloris Turquoise/Violet. Design audacieux, chaussant précis pour les joueurs offensifs.",
+    prix: 30000, prixPromo: null, stock: 10, sku: "NK-MVF-008",
+    images: [{ id: 4008, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-turquoise-violet.jpeg`, alt: "Nike Mercurial Vapor FG turquoise violet" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 127, nom: "Nike Mercurial Vapor FG Vert/Blanc", slug: "nike-mercurial-vapor-fg-vert-blanc",
+    description: "Crampon Nike Mercurial Vapor terrain naturel. Coloris Vert/Blanc visible sur le terrain, idéal pour se démarquer pendant le match.",
+    prix: 30000, prixPromo: 27000, stock: 14, sku: "NK-MVF-009",
+    images: [{ id: 4009, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-vert-blanc.jpeg`, alt: "Nike Mercurial Vapor FG vert blanc" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 128, nom: "Nike Mercurial Vapor FG Volt/Blanc", slug: "nike-mercurial-vapor-fg-volt-blanc",
+    description: "Crampon Nike Mercurial Vapor terrain naturel coloris Volt/Blanc. Le coloris signature des champions — semelle ACC carbone, tige légère, crampon conique.",
+    prix: 34000, prixPromo: null, stock: 15, sku: "NK-MVF-010",
+    images: [
+      { id: 4010, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-volt-blanc.jpeg`, alt: "Nike Mercurial Vapor FG volt blanc" },
+      { id: 4011, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-volt-blanc-2.jpeg`, alt: "Nike Mercurial Vapor FG volt blanc vue 2" },
+      { id: 4012, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-fg-volt-blanc-3.jpeg`, alt: "Nike Mercurial Vapor FG volt blanc vue 3" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Nike Mercurial Vapor — Terrain Synthétique (TF) ---
+  {
+    id: 129, nom: "Nike Mercurial Vapor TF Blanc Multicolore", slug: "nike-mercurial-vapor-tf-blanc-multicolore",
+    description: "Chaussure Nike Mercurial Vapor terrain synthétique. Semelle TF multi-crampons pour les terrains artificiels, tige légère et respirante. Coloris Blanc Multicolore.",
+    prix: 27000, prixPromo: null, stock: 12, sku: "NK-MVT-001",
+    images: [{ id: 4013, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-blanc-multicolore.jpeg`, alt: "Nike Mercurial Vapor TF blanc multicolore" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 130, nom: "Nike Mercurial Vapor TF Orange/Or", slug: "nike-mercurial-vapor-tf-orange-or",
+    description: "Chaussure Nike Mercurial Vapor terrain synthétique coloris Orange/Or. Idéale pour les terrains en gazon artificiel, excellente accroche et légèreté.",
+    prix: 28000, prixPromo: 25000, stock: 18, sku: "NK-MVT-002",
+    images: [
+      { id: 4014, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-orange-or.jpeg`, alt: "Nike Mercurial Vapor TF orange or" },
+      { id: 4015, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-orange-or-2.jpeg`, alt: "Nike Mercurial Vapor TF orange or vue 2" },
+      { id: 4016, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-orange-or-3.jpeg`, alt: "Nike Mercurial Vapor TF orange or vue 3" },
+      { id: 4017, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-orange-or-4.jpeg`, alt: "Nike Mercurial Vapor TF orange or vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 131, nom: "Nike Mercurial Vapor TF Vert Citron/Rouge", slug: "nike-mercurial-vapor-tf-vert-citron-rouge",
+    description: "Chaussure Nike Mercurial Vapor terrain synthétique. Coloris Vert Citron/Rouge, semelle multi-picots pour traction optimale sur gazon artificiel.",
+    prix: 27000, prixPromo: null, stock: 10, sku: "NK-MVT-003",
+    images: [
+      { id: 4018, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-vert-citron-rouge.jpeg`, alt: "Nike Mercurial Vapor TF vert citron rouge" },
+      { id: 4019, url: `${CHAUSSURES_IMG_BASE}/nike-mercurial-vapor-tf-vert-citron-rouge-2.jpeg`, alt: "Nike Mercurial Vapor TF vert citron rouge vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Nike Air Zoom Mercurial — Terrain Naturel (FG) ---
+  {
+    id: 132, nom: "Nike Air Zoom Mercurial FG Blanc/Bleu", slug: "nike-air-zoom-mercurial-fg-blanc-bleu",
+    description: "Crampon haut de gamme Nike Air Zoom Mercurial terrain naturel. Unité Air Zoom dans l'avant-pied pour une réactivité explosive, tige Flyknit légère. Coloris Blanc/Bleu.",
+    prix: 52000, prixPromo: null, stock: 5, sku: "NK-AZF-001",
+    images: [{ id: 4020, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-fg-blanc-bleu.jpeg`, alt: "Nike Air Zoom Mercurial FG blanc bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 133, nom: "Nike Air Zoom Mercurial FG Pêche/Bleu", slug: "nike-air-zoom-mercurial-fg-peche-bleu",
+    description: "Crampon haut de gamme Nike Air Zoom Mercurial terrain naturel. Air Zoom avant-pied, Flyknit, semelle carbone. Coloris Pêche/Bleu tendance.",
+    prix: 52000, prixPromo: 47000, stock: 4, sku: "NK-AZF-002",
+    images: [
+      { id: 4021, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-fg-peche-bleu.jpeg`, alt: "Nike Air Zoom Mercurial FG pêche bleu" },
+      { id: 4022, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-fg-peche-bleu-2.jpeg`, alt: "Nike Air Zoom Mercurial FG pêche bleu vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Nike Air Zoom Mercurial — Terrain Synthétique (TF) ---
+  {
+    id: 134, nom: "Nike Air Zoom Mercurial TF Bleu/Rose", slug: "nike-air-zoom-mercurial-tf-bleu-rose",
+    description: "Chaussure Nike Air Zoom Mercurial terrain synthétique. La technologie Air Zoom portée sur gazon artificiel — réactivité, légèreté, maintien. Coloris Bleu/Rose.",
+    prix: 46000, prixPromo: null, stock: 8, sku: "NK-AZT-001",
+    images: [
+      { id: 4023, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-bleu-rose.jpeg`, alt: "Nike Air Zoom Mercurial TF bleu rose" },
+      { id: 4024, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-bleu-rose-2.jpeg`, alt: "Nike Air Zoom Mercurial TF bleu rose vue 2" },
+      { id: 4025, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-bleu-rose-3.jpeg`, alt: "Nike Air Zoom Mercurial TF bleu rose vue 3" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 135, nom: "Nike Air Zoom Mercurial TF Pêche/Bleu", slug: "nike-air-zoom-mercurial-tf-peche-bleu",
+    description: "Chaussure Nike Air Zoom Mercurial terrain synthétique coloris Pêche/Bleu. Air Zoom avant-pied, semelle TF multi-picots, tige Flyknit respirante.",
+    prix: 46000, prixPromo: 42000, stock: 6, sku: "NK-AZT-002",
+    images: [
+      { id: 4026, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-peche-bleu.jpeg`, alt: "Nike Air Zoom Mercurial TF pêche bleu" },
+      { id: 4027, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-peche-bleu-2.jpeg`, alt: "Nike Air Zoom Mercurial TF pêche bleu vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 136, nom: "Nike Air Zoom Mercurial TF Rose/Orange", slug: "nike-air-zoom-mercurial-tf-rose-orange",
+    description: "Chaussure Nike Air Zoom Mercurial terrain synthétique. Coloris Rose/Orange percutant, technologie Air Zoom pour chaque démarrage explosif.",
+    prix: 46000, prixPromo: null, stock: 7, sku: "NK-AZT-003",
+    images: [
+      { id: 4028, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-rose-orange.jpeg`, alt: "Nike Air Zoom Mercurial TF rose orange" },
+      { id: 4029, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-rose-orange-2.jpeg`, alt: "Nike Air Zoom Mercurial TF rose orange vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 137, nom: "Nike Air Zoom Mercurial TF Vert Citron", slug: "nike-air-zoom-mercurial-tf-vert-citron",
+    description: "Chaussure Nike Air Zoom Mercurial terrain synthétique coloris Vert Citron. Très visible sur le terrain, réactivité maximale grâce à l'unité Air Zoom.",
+    prix: 46000, prixPromo: null, stock: 9, sku: "NK-AZT-004",
+    images: [
+      { id: 4030, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-vert-citron.jpeg`, alt: "Nike Air Zoom Mercurial TF vert citron" },
+      { id: 4031, url: `${CHAUSSURES_IMG_BASE}/nike-air-zoom-mercurial-tf-vert-citron-2.jpeg`, alt: "Nike Air Zoom Mercurial TF vert citron vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Nike Phantom FG ---
+  {
+    id: 138, nom: "Nike Phantom FG Blanc/Bleu", slug: "nike-phantom-fg-blanc-bleu",
+    description: "Crampon Nike Phantom GX terrain naturel. Conçu pour la précision des passes et des tirs, zone de frappe Ghost Lace sans lacets apparents. Coloris Blanc/Bleu.",
+    prix: 40000, prixPromo: null, stock: 6, sku: "NK-PH-001",
+    images: [{ id: 4032, url: `${CHAUSSURES_IMG_BASE}/nike-phantom-fg-blanc-bleu.jpeg`, alt: "Nike Phantom FG blanc bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Adidas F50 FG ---
+  {
+    id: 139, nom: "Adidas F50 FG Blanc/Mint", slug: "adidas-f50-fg-blanc-mint",
+    description: "Crampon Adidas F50 terrain naturel coloris Blanc/Mint. Tige ultra-légère SpeedSkin, semelle conique pour pivots rapides. La référence des attaquants.",
+    prix: 28000, prixPromo: null, stock: 10, sku: "AD-F50-001",
+    images: [{ id: 4033, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-blanc-mint.jpeg`, alt: "Adidas F50 FG blanc mint" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 140, nom: "Adidas F50 FG Bleu/Volt (Messi Edition)", slug: "adidas-f50-fg-bleu-volt-messi",
+    description: "Crampon Adidas F50 terrain naturel édition spéciale Messi. Coloris Bleu/Volt signature, tige légère, crampon conique pour un jeu technique et rapide.",
+    prix: 30000, prixPromo: null, stock: 8, sku: "AD-F50-002",
+    images: [
+      { id: 4034, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-bleu-volt-messi.jpeg`, alt: "Adidas F50 FG bleu volt Messi edition" },
+      { id: 4035, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-bleu-volt.jpeg`, alt: "Adidas F50 FG bleu volt" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 141, nom: "Adidas F50 FG Noir/Bleu", slug: "adidas-f50-fg-noir-bleu",
+    description: "Crampon Adidas F50 terrain naturel coloris Noir/Bleu. Design sobre et efficace, semelle rigide AG, excellent maintien du pied.",
+    prix: 27000, prixPromo: null, stock: 14, sku: "AD-F50-003",
+    images: [{ id: 4036, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-noir-bleu.jpeg`, alt: "Adidas F50 FG noir bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 142, nom: "Adidas F50 FG Noir/Volt", slug: "adidas-f50-fg-noir-volt",
+    description: "Crampon Adidas F50 terrain naturel coloris Noir/Volt. Contraste marqué noir et jaune fluo, tige SpeedSkin légère, retour d'énergie optimal.",
+    prix: 28000, prixPromo: 25000, stock: 16, sku: "AD-F50-004",
+    images: [
+      { id: 4037, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-noir-volt.jpeg`, alt: "Adidas F50 FG noir volt" },
+      { id: 4038, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-noir-volt-2.jpeg`, alt: "Adidas F50 FG noir volt vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 143, nom: "Adidas F50 FG Orange/Blanc", slug: "adidas-f50-fg-orange-blanc",
+    description: "Crampon Adidas F50 terrain naturel coloris Orange/Blanc. Très visible sur herbe, conception légère pour la vitesse pure.",
+    prix: 27000, prixPromo: null, stock: 9, sku: "AD-F50-005",
+    images: [{ id: 4039, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-orange-blanc.jpeg`, alt: "Adidas F50 FG orange blanc" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 144, nom: "Adidas F50 FG Rose/Violet", slug: "adidas-f50-fg-rose-violet",
+    description: "Crampon Adidas F50 terrain naturel coloris Rose/Violet. Edition colorée unique, légèreté signature de la gamme F50.",
+    prix: 27000, prixPromo: null, stock: 7, sku: "AD-F50-006",
+    images: [{ id: 4040, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-rose-violet.jpeg`, alt: "Adidas F50 FG rose violet" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 145, nom: "Adidas F50 FG Vert/Noir", slug: "adidas-f50-fg-vert-noir",
+    description: "Crampon Adidas F50 terrain naturel coloris Vert/Noir. Accroche précise sur herbe naturelle, tige légère pour accélérations immédiates.",
+    prix: 27000, prixPromo: null, stock: 11, sku: "AD-F50-007",
+    images: [{ id: 4041, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-vert-noir.jpeg`, alt: "Adidas F50 FG vert noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 146, nom: "Adidas F50 FG Volt/Rose/Noir", slug: "adidas-f50-fg-volt-rose-noir",
+    description: "Crampon Adidas F50 terrain naturel coloris Volt/Rose/Noir. Tricolore audacieux, semelle conique multi-directionnelle pour les joueurs techniques.",
+    prix: 28000, prixPromo: null, stock: 8, sku: "AD-F50-008",
+    images: [{ id: 4042, url: `${CHAUSSURES_IMG_BASE}/adidas-f50-fg-volt-rose-noir.jpeg`, alt: "Adidas F50 FG volt rose noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Adidas Copa FG ---
+  {
+    id: 147, nom: "Adidas Copa FG Blanc/Argent", slug: "adidas-copa-fg-blanc-argent",
+    description: "Crampon Adidas Copa terrain naturel. Tige en cuir K-Leather pour un toucher de balle premium, semelle rigide AG. La référence classique en Blanc/Argent.",
+    prix: 38000, prixPromo: null, stock: 6, sku: "AD-CP-001",
+    images: [
+      { id: 4043, url: `${CHAUSSURES_IMG_BASE}/adidas-copa-fg-blanc-argent.jpeg`, alt: "Adidas Copa FG blanc argent" },
+      { id: 4044, url: `${CHAUSSURES_IMG_BASE}/adidas-copa-fg-blanc-argent-2.jpeg`, alt: "Adidas Copa FG blanc argent vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Adidas Predator FG ---
+  {
+    id: 148, nom: "Adidas Predator FG Blanc/Argent/Rouge", slug: "adidas-predator-fg-blanc-argent-rouge",
+    description: "Crampon Adidas Predator Elite terrain naturel. Zones de frappe en élastomère pour puissance et précision maximales. Coloris Blanc/Argent/Rouge collector.",
+    prix: 40000, prixPromo: null, stock: 5, sku: "AD-PR-001",
+    images: [
+      { id: 4045, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-blanc-argent-rouge.jpeg`, alt: "Adidas Predator FG blanc argent rouge" },
+      { id: 4046, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-blanc-argent-rouge-2.jpeg`, alt: "Adidas Predator FG blanc argent rouge vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 149, nom: "Adidas Predator FG Bleu/Volt", slug: "adidas-predator-fg-bleu-volt",
+    description: "Crampon Adidas Predator terrain naturel coloris Bleu/Volt. Bandeau de contrôle en élastomère, tige textile, semelle rigide pour tirs puissants.",
+    prix: 38000, prixPromo: 35000, stock: 7, sku: "AD-PR-002",
+    images: [{ id: 4047, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-bleu-volt.jpeg`, alt: "Adidas Predator FG bleu volt" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 150, nom: "Adidas Predator FG Noir/Turquoise", slug: "adidas-predator-fg-noir-turquoise",
+    description: "Crampon Adidas Predator terrain naturel coloris Noir/Turquoise. Design agressif, zones élastomère pour contrôle et puissance, idéal pour les milieux de terrain.",
+    prix: 38000, prixPromo: null, stock: 12, sku: "AD-PR-003",
+    images: [
+      { id: 4048, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-noir-turquoise.jpeg`, alt: "Adidas Predator FG noir turquoise" },
+      { id: 4049, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-noir-turquoise-2.jpeg`, alt: "Adidas Predator FG noir turquoise vue 2" },
+      { id: 4050, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-noir-turquoise-3.jpeg`, alt: "Adidas Predator FG noir turquoise vue 3" },
+      { id: 4051, url: `${CHAUSSURES_IMG_BASE}/adidas-predator-fg-noir-turquoise-4.jpeg`, alt: "Adidas Predator FG noir turquoise vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Adidas X Speedportal FG ---
+  {
+    id: 151, nom: "Adidas X Speedportal FG Blanc/Rouge", slug: "adidas-x-speedportal-fg-blanc-rouge",
+    description: "Crampon Adidas X Speedportal terrain naturel. La chaussure des sprinters — tige Speedskin 2.0, semelle carbone, crampon conique. Coloris Blanc/Rouge/Roses.",
+    prix: 32000, prixPromo: null, stock: 8, sku: "AD-XS-001",
+    images: [{ id: 4052, url: `${CHAUSSURES_IMG_BASE}/adidas-x-speedportal-fg-blanc-rouge-roses.jpeg`, alt: "Adidas X Speedportal FG blanc rouge roses" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 152, nom: "Adidas X Speedportal FG Marine/Or (Dembelé)", slug: "adidas-x-speedportal-fg-marine-or-dembele",
+    description: "Crampon Adidas X Speedportal terrain naturel édition Ousmane Dembelé. Coloris Marine/Or exclusif, vitesse maximale, tige ultra-légère.",
+    prix: 34000, prixPromo: null, stock: 5, sku: "AD-XS-002",
+    images: [{ id: 4053, url: `${CHAUSSURES_IMG_BASE}/adidas-x-speedportal-fg-marine-or-dembele.jpeg`, alt: "Adidas X Speedportal FG marine or Dembelé" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: true, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 153, nom: "Adidas X Speedportal FG Violet/Rose", slug: "adidas-x-speedportal-fg-violet-rose",
+    description: "Crampon Adidas X Speedportal terrain naturel coloris Violet/Rose. Design audacieux pour les joueurs qui veulent se distinguer, vitesse et légèreté.",
+    prix: 32000, prixPromo: 29000, stock: 9, sku: "AD-XS-003",
+    images: [{ id: 4054, url: `${CHAUSSURES_IMG_BASE}/adidas-x-speedportal-fg-violet-rose.jpeg`, alt: "Adidas X Speedportal FG violet rose" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+
+  // --- Puma Future TF ---
+  {
+    id: 154, nom: "Puma Future TF Blanc/Cyan", slug: "puma-future-tf-blanc-cyan",
+    description: "Chaussure Puma Future terrain synthétique coloris Blanc/Cyan. Laçage FUZIONFIT adaptatif, semelle TF multi-crampons, excellente accroche sur gazon artificiel.",
+    prix: 25000, prixPromo: null, stock: 15, sku: "PU-FT-001",
+    images: [
+      { id: 4055, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-blanc-cyan.jpeg`, alt: "Puma Future TF blanc cyan" },
+      { id: 4056, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-blanc-cyan-2.jpeg`, alt: "Puma Future TF blanc cyan vue 2" },
+      { id: 4057, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-blanc-cyan-3.jpeg`, alt: "Puma Future TF blanc cyan vue 3" },
+      { id: 4058, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-blanc-cyan-4.jpeg`, alt: "Puma Future TF blanc cyan vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
+  {
+    id: 155, nom: "Puma Future TF Rouge/Bleu/Noir", slug: "puma-future-tf-rouge-bleu-noir",
+    description: "Chaussure Puma Future terrain synthétique coloris Rouge/Bleu/Noir. FUZIONFIT adaptatif pour maintien parfait du pied, picots coniques pour une accroche multi-directionnelle.",
+    prix: 25000, prixPromo: 22000, stock: 12, sku: "PU-FT-002",
+    images: [
+      { id: 4059, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-rouge-bleu-noir.jpeg`, alt: "Puma Future TF rouge bleu noir" },
+      { id: 4060, url: `${CHAUSSURES_IMG_BASE}/puma-future-tf-rouge-bleu-noir-2.jpeg`, alt: "Puma Future TF rouge bleu noir vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
+    createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
+  },
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
   CAT_RUNNING, CAT_FOOTBALL, CAT_FITNESS, CAT_MUSCU,
-  CAT_BASKET, CAT_JOGGING, CAT_BASKETS, CAT_EQUIPEMENTS,
+  CAT_BASKET, CAT_JOGGING, CAT_BASKETS, CAT_EQUIPEMENTS, CAT_ACCESSOIRES,
 ];
 
 export const MOCK_BRANDS: Brand[] = [
-  BRAND_NIKE, BRAND_ADIDAS, BRAND_UNDER_ARMOUR,
+  BRAND_NIKE, BRAND_ADIDAS, BRAND_UNDER_ARMOUR, BRAND_VEEDAR, BRAND_EMMA_SPORT,
+  BRAND_DERBYSTAR, BRAND_KIPSTA, BRAND_MOLTEN, BRAND_PUMA, BRAND_PRIMERA,
 ];
