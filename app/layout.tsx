@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollRevealEffect from "@/components/ScrollRevealEffect";
+import { CartProvider } from "@/contexts/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emma-sport.bj";
 
@@ -60,8 +62,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ScrollRevealEffect />
-        {children}
+        <CartProvider>
+          <ScrollRevealEffect />
+          {children}
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

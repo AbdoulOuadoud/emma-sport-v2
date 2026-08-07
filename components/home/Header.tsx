@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
@@ -66,6 +67,8 @@ export default function Header() {
     router.push(`/catalogue?search=${encodeURIComponent(value.trim())}`);
   };
 
+  const { count, openCart } = useCart();
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
@@ -101,6 +104,21 @@ export default function Header() {
                 <circle cx="11" cy="11" r="7" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
+            </button>
+
+            <button
+              className="icon-btn cart-btn"
+              onClick={openCart}
+              aria-label="Voir le panier"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              {count > 0 && (
+                <span className="cart-count">{count > 9 ? "9+" : count}</span>
+              )}
             </button>
 
             <Link href="/contact" className="btn btn-dark contact-btn">

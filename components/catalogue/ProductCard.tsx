@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/types";
 import { formatPrice, getDiscountPercent } from "@/lib/utils";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -18,6 +19,16 @@ const HeartIcon = () => (
 
 export default function ProductCard({ product }: ProductCardProps) {
   const [fav, setFav] = useState(false);
+  const [added, setAdded] = useState(false);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
 
   const {
     nom, slug, prix, prixPromo, disponible, vedette,
@@ -73,7 +84,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        <div className="quick">Voir le produit</div>
+        <button
+          className={`quick${added ? " added" : ""}`}
+          onClick={handleAddToCart}
+          aria-label="Ajouter au panier"
+        >
+          {added ? "Ajouté !" : "Ajouter au panier"}
+        </button>
       </div>
 
       <div className="info">
