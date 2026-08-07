@@ -20,12 +20,17 @@ const BRAND_KIPSTA: Brand = { id: 7, nom: "Kipsta", logo: null };
 const BRAND_MOLTEN: Brand = { id: 8, nom: "Molten", logo: null };
 const BRAND_PUMA: Brand = { id: 9, nom: "Puma", logo: null };
 const BRAND_PRIMERA: Brand = { id: 10, nom: "Primera", logo: null };
+const BRAND_JORDAN: Brand = { id: 11, nom: "Jordan", logo: null };
+const BRAND_UMBRO: Brand = { id: 12, nom: "Umbro", logo: null };
+const BRAND_NIFTIWARE: Brand = { id: 13, nom: "Niftiware", logo: null };
+const BRAND_MACRON: Brand = { id: 14, nom: "Macron", logo: null };
 
 const ADIDAS_IMG_BASE = "/articles/Vetements/Adidas";
 const NIKE_IMG_BASE = "/articles/Vetements/Nike";
 const ACCESSOIRES_IMG_BASE = "/articles/Accessoires";
 const BALLONS_IMG_BASE = "/articles/Ballons";
 const CHAUSSURES_IMG_BASE = "/articles/Chaussures/Nike";
+const MAILLOTS_IMG_BASE = "/articles/Maillots";
 
 const TYPE_SHORT: ArticleType = { slug: "short", nom: "Short" };
 const TYPE_JOGGING: ArticleType = { slug: "jogging", nom: "Jogging" };
@@ -41,11 +46,12 @@ const TYPE_BALLON: ArticleType = { slug: "ballon", nom: "Ballon" };
 const TYPE_SAC: ArticleType = { slug: "sac", nom: "Sac" };
 const TYPE_GANTS: ArticleType = { slug: "gants", nom: "Gants" };
 const TYPE_PROTECTION: ArticleType = { slug: "protection", nom: "Protection" };
+const TYPE_ENSEMBLE: ArticleType = { slug: "ensemble", nom: "Ensemble" };
 
 export const ARTICLE_TYPES: ArticleType[] = [
   TYPE_SHORT, TYPE_JOGGING, TYPE_TSHIRT, TYPE_DEBARDEUR, TYPE_CHAUSSETTES,
-  TYPE_CHAUSSURES, TYPE_CRAMPONS, TYPE_MAILLOT, TYPE_VESTE, TYPE_EQUIPEMENT,
-  TYPE_BALLON, TYPE_SAC, TYPE_GANTS, TYPE_PROTECTION,
+  TYPE_CHAUSSURES, TYPE_CRAMPONS, TYPE_MAILLOT, TYPE_ENSEMBLE, TYPE_VESTE,
+  TYPE_EQUIPEMENT, TYPE_BALLON, TYPE_SAC, TYPE_GANTS, TYPE_PROTECTION,
 ];
 
 export const MOCK_PRODUCTS: Product[] = [
@@ -1386,6 +1392,352 @@ export const MOCK_PRODUCTS: Product[] = [
     categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_CRAMPONS, vedette: false, disponible: true,
     createdAt: "2026-07-10T00:00:00.000Z", updatedAt: "2026-07-10T00:00:00.000Z",
   },
+
+  // ================================================================
+  // MAILLOTS — ÉQUIPES NATIONALES
+  // ================================================================
+
+  {
+    id: 156, nom: "Maillot France FFF Nike Domicile 2022", slug: "maillot-france-fff-nike-domicile-2022",
+    description: "Maillot officiel de l'Équipe de France Nike saison 2022. Coloris bleu nuit emblématique, technologie Dri-FIT ADV pour un confort optimal. Flocage nom et numéro disponible en boutique.",
+    prix: 22000, prixPromo: 18000, stock: 10, sku: "NK-ML-FR22",
+    images: [{ id: 5001, url: `${MAILLOTS_IMG_BASE}/maillot-france-fff-nike-domicile-bleu-2022.jpeg`, alt: "Maillot France FFF Nike domicile bleu 2022" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 157, nom: "Maillot France FFF Nike Domicile 2024", slug: "maillot-france-fff-nike-domicile-2024",
+    description: "Maillot officiel de l'Équipe de France Nike saison 2024. Bleu intense, col rond moderne, badge FFF tissé. Technologie Dri-FIT pour évacuer la transpiration. Flocage disponible en boutique.",
+    prix: 25000, prixPromo: null, stock: 14, sku: "NK-ML-FR24",
+    images: [
+      { id: 5002, url: `${MAILLOTS_IMG_BASE}/maillot-france-fff-nike-domicile-bleu-2024.jpeg`, alt: "Maillot France FFF Nike 2024" },
+      { id: 5003, url: `${MAILLOTS_IMG_BASE}/maillot-france-fff-nike-domicile-bleu-2024-2.jpeg`, alt: "Maillot France FFF Nike 2024 vue 2" },
+      { id: 5004, url: `${MAILLOTS_IMG_BASE}/maillot-france-fff-nike-domicile-bleu-2024-3.jpeg`, alt: "Maillot France FFF Nike 2024 vue 3" },
+      { id: 5005, url: `${MAILLOTS_IMG_BASE}/maillot-france-fff-nike-domicile-bleu-2024-4.jpeg`, alt: "Maillot France FFF Nike 2024 vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 158, nom: "Maillot Allemagne DFB Adidas Domicile 2024", slug: "maillot-allemagne-dfb-adidas-domicile-2024",
+    description: "Maillot officiel de l'Équipe d'Allemagne Adidas saison 2024. Blanc immaculé avec les 3 bandes noires signatures. Tissu léger et respirant. Flocage personnalisé disponible en boutique.",
+    prix: 24000, prixPromo: null, stock: 12, sku: "AD-ML-DE24",
+    images: [
+      { id: 5006, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-domicile-blanc-2024.jpeg`, alt: "Maillot Allemagne DFB Adidas domicile 2024" },
+      { id: 5007, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-domicile-blanc-2024-2.jpeg`, alt: "Maillot Allemagne DFB Adidas domicile 2024 vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 159, nom: "Maillot Allemagne DFB Adidas Domicile Rétro", slug: "maillot-allemagne-dfb-adidas-domicile-retro",
+    description: "Maillot rétro de l'Équipe d'Allemagne en édition Adidas Originals. Design vintage, blanc cassé avec 3 bandes classiques — parfait pour les collectionneurs et les fans.",
+    prix: 22000, prixPromo: 19000, stock: 8, sku: "AD-ML-DERT",
+    images: [
+      { id: 5008, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-domicile-blanc-retro.jpeg`, alt: "Maillot Allemagne DFB Adidas rétro blanc" },
+      { id: 5009, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-domicile-blanc-retro-2.jpeg`, alt: "Maillot Allemagne DFB Adidas rétro blanc vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 160, nom: "Maillot Allemagne DFB Adidas Originals Extérieur", slug: "maillot-allemagne-dfb-adidas-originals-exterieur",
+    description: "Maillot extérieur de l'Équipe d'Allemagne en édition Adidas Originals. Coloris bleu marine avec détails rétro — une pièce lifestyle et collector à la fois.",
+    prix: 23000, prixPromo: null, stock: 9, sku: "AD-ML-DEEX",
+    images: [
+      { id: 5010, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-originals-exterieur-bleu-marine.jpeg`, alt: "Maillot Allemagne extérieur bleu marine" },
+      { id: 5011, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-originals-exterieur-bleu-marine-2.jpeg`, alt: "Maillot Allemagne extérieur bleu marine vue 2" },
+      { id: 5012, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-originals-exterieur-bleu-marine-3.jpeg`, alt: "Maillot Allemagne extérieur bleu marine vue 3" },
+      { id: 5013, url: `${MAILLOTS_IMG_BASE}/maillot-allemagne-dfb-adidas-originals-exterieur-bleu-marine-4.jpeg`, alt: "Maillot Allemagne extérieur bleu marine vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 161, nom: "Maillot Argentine AFA Adidas Domicile", slug: "maillot-argentine-afa-adidas-domicile",
+    description: "Maillot officiel de l'Albiceleste, champion du monde 2022. Rayures blanc et bleu ciel iconiques, technologie HEAT.RDY, badge AFA brodé. Flocage Messi ou personnalisé en boutique.",
+    prix: 25000, prixPromo: null, stock: 20, sku: "AD-ML-ARDO",
+    images: [
+      { id: 5014, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-domicile-blanc-bleu.jpeg`, alt: "Maillot Argentine AFA Adidas domicile blanc bleu" },
+      { id: 5015, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-domicile-blanc-bleu-2.jpeg`, alt: "Maillot Argentine AFA Adidas domicile vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 162, nom: "Maillot Argentine AFA Adidas Extérieur", slug: "maillot-argentine-afa-adidas-exterieur",
+    description: "Maillot extérieur de l'Argentine Adidas. Coloris bleu marine élégant, broderies dorées, style collector. La tenue des grands matches à l'extérieur. Flocage possible en boutique.",
+    prix: 24000, prixPromo: null, stock: 10, sku: "AD-ML-AREX",
+    images: [
+      { id: 5016, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-exterieur-bleu-marine.jpeg`, alt: "Maillot Argentine extérieur bleu marine" },
+      { id: 5017, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-exterieur-bleu-marine-2.jpeg`, alt: "Maillot Argentine extérieur bleu marine vue 2" },
+      { id: 5018, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-exterieur-bleu-marine-3.jpeg`, alt: "Maillot Argentine extérieur bleu marine vue 3" },
+      { id: 5019, url: `${MAILLOTS_IMG_BASE}/maillot-argentine-afa-adidas-exterieur-bleu-marine-4.jpeg`, alt: "Maillot Argentine extérieur bleu marine vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 163, nom: "Maillot Brésil CBF Nike Domicile", slug: "maillot-bresil-cbf-nike-domicile",
+    description: "Maillot officiel de la Seleção, Nike. Jaune flamboyant avec détails verts, technologie Dri-FIT ADV. L'un des maillots les plus emblématiques du football mondial. Flocage possible en boutique.",
+    prix: 25000, prixPromo: null, stock: 16, sku: "NK-ML-BRDO",
+    images: [
+      { id: 5020, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-nike-domicile-jaune.jpeg`, alt: "Maillot Brésil CBF Nike domicile jaune" },
+      { id: 5021, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-nike-domicile-jaune-2.jpeg`, alt: "Maillot Brésil Nike domicile vue 2" },
+      { id: 5022, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-nike-domicile-jaune-3.jpeg`, alt: "Maillot Brésil Nike domicile vue 3" },
+      { id: 5023, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-nike-domicile-jaune-4.jpeg`, alt: "Maillot Brésil Nike domicile vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 164, nom: "Maillot Brésil CBF Jordan Extérieur", slug: "maillot-bresil-cbf-jordan-exterieur",
+    description: "Maillot extérieur du Brésil en édition Jordan Brand. Coloris bleu foncé rare et très recherché, swoosh Nike et badge CBF. Édition collector pour les amateurs de streetwear et de foot.",
+    prix: 27000, prixPromo: null, stock: 8, sku: "JD-ML-BREX",
+    images: [
+      { id: 5024, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-jordan-exterieur-bleu-fonce.jpeg`, alt: "Maillot Brésil Jordan extérieur bleu foncé" },
+      { id: 5025, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-jordan-exterieur-bleu-fonce-2.jpeg`, alt: "Maillot Brésil Jordan extérieur vue 2" },
+      { id: 5026, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-jordan-exterieur-bleu-fonce-3.jpeg`, alt: "Maillot Brésil Jordan extérieur vue 3" },
+      { id: 5027, url: `${MAILLOTS_IMG_BASE}/maillot-bresil-cbf-jordan-exterieur-bleu-fonce-4.jpeg`, alt: "Maillot Brésil Jordan extérieur vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_JORDAN, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 165, nom: "Maillot Croatie HNS Nike Domicile Damier", slug: "maillot-croatie-hns-nike-domicile-damier",
+    description: "Maillot officiel de l'Équipe de Croatie Nike. Damier rouge et blanc légendaire, technologie Dri-FIT, badge HNS brodé. L'un des maillots les plus reconnaissables du monde.",
+    prix: 24000, prixPromo: null, stock: 12, sku: "NK-ML-HRDO",
+    images: [
+      { id: 5028, url: `${MAILLOTS_IMG_BASE}/maillot-croatie-hns-nike-domicile-damier-rouge-blanc.jpeg`, alt: "Maillot Croatie HNS Nike domicile damier rouge blanc" },
+      { id: 5029, url: `${MAILLOTS_IMG_BASE}/maillot-croatie-hns-nike-domicile-damier-rouge-blanc-2.jpeg`, alt: "Maillot Croatie Nike vue 2" },
+      { id: 5030, url: `${MAILLOTS_IMG_BASE}/maillot-croatie-hns-nike-domicile-damier-rouge-blanc-3.jpeg`, alt: "Maillot Croatie Nike vue 3" },
+      { id: 5031, url: `${MAILLOTS_IMG_BASE}/maillot-croatie-hns-nike-domicile-damier-rouge-blanc-4.jpeg`, alt: "Maillot Croatie Nike vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIKE, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 166, nom: "Maillot Espagne RFEF Adidas Domicile Rouge", slug: "maillot-espagne-rfef-adidas-domicile-rouge",
+    description: "Maillot officiel de la Roja, champion d'Europe 2024. Rouge intense, technologie HEAT.RDY, badge RFEF brodé. Flocage Yamal, Pedri ou personnalisé disponible en boutique.",
+    prix: 25000, prixPromo: null, stock: 15, sku: "AD-ML-ESDO",
+    images: [
+      { id: 5032, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-domicile-rouge.jpeg`, alt: "Maillot Espagne RFEF Adidas domicile rouge" },
+      { id: 5033, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-domicile-rouge-2.jpeg`, alt: "Maillot Espagne Adidas vue 2" },
+      { id: 5034, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-domicile-rouge-3.jpeg`, alt: "Maillot Espagne Adidas vue 3" },
+      { id: 5035, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-domicile-rouge-4.jpeg`, alt: "Maillot Espagne Adidas vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 167, nom: "Maillot Espagne RFEF Adidas Originals Extérieur", slug: "maillot-espagne-rfef-adidas-originals-exterieur",
+    description: "Maillot extérieur de l'Espagne en édition Adidas Originals. Blanc avec détails rétro et badge RFEF — un maillot lifestyle collector pour les fans de la Roja.",
+    prix: 23000, prixPromo: null, stock: 9, sku: "AD-ML-ESEX",
+    images: [
+      { id: 5036, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-originals-exterieur-blanc.jpeg`, alt: "Maillot Espagne extérieur blanc Adidas Originals" },
+      { id: 5037, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-originals-exterieur-blanc-2.jpeg`, alt: "Maillot Espagne extérieur blanc vue 2" },
+      { id: 5038, url: `${MAILLOTS_IMG_BASE}/maillot-espagne-rfef-adidas-originals-exterieur-blanc-3.jpeg`, alt: "Maillot Espagne extérieur blanc vue 3" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_ADIDAS, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 168, nom: "Maillot Portugal FPF Puma Domicile + Extérieur", slug: "maillot-portugal-fpf-puma-pack",
+    description: "Pack maillots Portugal FPF Puma — découvrez les deux tenues (domicile rouge et extérieur blanc) de l'équipe nationale portugaise. Chaque maillot disponible séparément en boutique, flocage possible.",
+    prix: 23000, prixPromo: null, stock: 10, sku: "PU-ML-PTPK",
+    images: [{ id: 5039, url: `${MAILLOTS_IMG_BASE}/maillot-portugal-fpf-puma-domicile-rouge-exterieur-blanc-promo.jpeg`, alt: "Maillot Portugal FPF Puma domicile et extérieur" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 169, nom: "Maillot Portugal FPF Puma Extérieur Blanc/Vert", slug: "maillot-portugal-fpf-puma-exterieur-blanc-vert",
+    description: "Maillot extérieur de l'Équipe du Portugal Puma. Blanc avec finitions vertes subtiles, technologie dryCELL, badge FPF brodé. Flocage Ronaldo ou personnalisé disponible en boutique.",
+    prix: 23000, prixPromo: 20000, stock: 12, sku: "PU-ML-PTEX",
+    images: [
+      { id: 5040, url: `${MAILLOTS_IMG_BASE}/maillot-portugal-fpf-puma-exterieur-blanc-vert.jpeg`, alt: "Maillot Portugal extérieur blanc vert" },
+      { id: 5041, url: `${MAILLOTS_IMG_BASE}/maillot-portugal-fpf-puma-exterieur-blanc-vert-2.jpeg`, alt: "Maillot Portugal extérieur blanc vert vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 170, nom: "Maillot Portugal FPF Puma Édition Spéciale Noir", slug: "maillot-portugal-fpf-puma-edition-speciale-noir",
+    description: "Maillot Portugal FPF Puma édition spéciale coloris Noir. Design rare et exclusif, tissu technique dryCELL, idéal pour les collectionneurs et fans de la Seleção das Quinas.",
+    prix: 26000, prixPromo: null, stock: 5, sku: "PU-ML-PTES",
+    images: [{ id: 5042, url: `${MAILLOTS_IMG_BASE}/maillot-portugal-fpf-puma-edition-speciale-noir.jpeg`, alt: "Maillot Portugal Puma édition spéciale noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_PUMA, typeArticle: TYPE_MAILLOT, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 171, nom: "Maillot RDC FECOFA Umbro Domicile", slug: "maillot-rdc-fecofa-umbro-domicile",
+    description: "Maillot officiel de la République Démocratique du Congo Umbro. Coloris blanc avec détails rouge et bleu, badge FECOFA. Soutenez les Léopards — flocage personnalisé disponible en boutique.",
+    prix: 20000, prixPromo: null, stock: 14, sku: "UM-ML-CDDO",
+    images: [
+      { id: 5043, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-domicile-blanc.jpeg`, alt: "Maillot RDC FECOFA Umbro domicile blanc" },
+      { id: 5044, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-domicile-blanc-2.jpeg`, alt: "Maillot RDC Umbro domicile vue 2" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_UMBRO, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 172, nom: "Maillot RDC FECOFA Umbro Extérieur Bleu", slug: "maillot-rdc-fecofa-umbro-exterieur-bleu",
+    description: "Maillot extérieur de la RDC Umbro. Coloris bleu foncé avec détails tricolores, badge FECOFA brodé. Flocage personnalisé disponible en boutique.",
+    prix: 20000, prixPromo: 17000, stock: 10, sku: "UM-ML-CDEX",
+    images: [
+      { id: 5045, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-exterieur-bleu.jpeg`, alt: "Maillot RDC FECOFA Umbro extérieur bleu" },
+      { id: 5046, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-exterieur-bleu-2.jpeg`, alt: "Maillot RDC Umbro extérieur vue 2" },
+      { id: 5047, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-exterieur-bleu-3.jpeg`, alt: "Maillot RDC Umbro extérieur vue 3" },
+      { id: 5048, url: `${MAILLOTS_IMG_BASE}/maillot-rdc-fecofa-umbro-exterieur-bleu-4.jpeg`, alt: "Maillot RDC Umbro extérieur vue 4" },
+    ],
+    categorie: CAT_FOOTBALL, marque: BRAND_UMBRO, typeArticle: TYPE_MAILLOT, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+
+  // ================================================================
+  // ENSEMBLES FOOTBALL — GÉNÉRIQUES
+  // ================================================================
+
+  {
+    id: 173, nom: "Ensemble Football Bleu Royal/Blanc", slug: "ensemble-foot-bleu-royal-blanc",
+    description: "Ensemble football maillot + short en bleu royal et blanc. Tissu technique respirant, impression sublimation, idéal pour les équipes et les commandes groupées. Flocage personnalisé disponible.",
+    prix: 14000, prixPromo: null, stock: 50, sku: "ES-GEN-001",
+    images: [{ id: 5049, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-generique-bleu-royal-blanc.jpeg`, alt: "Ensemble football bleu royal blanc" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 174, nom: "Ensemble Football Gris/Blanc/Noir", slug: "ensemble-foot-gris-blanc-noir",
+    description: "Ensemble football maillot + short tricolore gris, blanc et noir. Design sobre et moderne, tissu polyester respirant, adapté à toutes les morphologies. Flocage personnalisé disponible.",
+    prix: 14000, prixPromo: null, stock: 45, sku: "ES-GEN-002",
+    images: [{ id: 5050, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-generique-gris-blanc-noir.jpeg`, alt: "Ensemble football gris blanc noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 175, nom: "Ensemble Football Jaune/Noir", slug: "ensemble-foot-jaune-noir",
+    description: "Ensemble football maillot + short jaune et noir, très visible sur le terrain. Impression sublimation qualité pro, tissu technique léger. Idéal pour les équipes locales.",
+    prix: 14000, prixPromo: null, stock: 40, sku: "ES-GEN-003",
+    images: [{ id: 5051, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-generique-jaune-noir.jpeg`, alt: "Ensemble football jaune noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 176, nom: "Ensemble Football Rose/Noir", slug: "ensemble-foot-rose-noir",
+    description: "Ensemble football maillot + short rose et noir. Couleurs vives et tendance, tissu respirant sublimé. Parfait pour les équipes féminines ou les clubs souhaitant se démarquer.",
+    prix: 14000, prixPromo: null, stock: 35, sku: "ES-GEN-004",
+    images: [{ id: 5052, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-generique-rose-noir.jpeg`, alt: "Ensemble football rose noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 177, nom: "Ensemble Football Vert Fluo/Noir", slug: "ensemble-foot-vert-fluo-noir",
+    description: "Ensemble football maillot + short vert fluo et noir. Ultra visible sur le terrain, tissu technique sublimé qualité pro. Pour les équipes qui veulent marquer les esprits.",
+    prix: 14000, prixPromo: null, stock: 38, sku: "ES-GEN-005",
+    images: [{ id: 5053, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-generique-vert-fluo-noir.jpeg`, alt: "Ensemble football vert fluo noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 178, nom: "Ensemble Football Macron Orange/Bleu Marine", slug: "ensemble-foot-macron-orange-bleu-marine",
+    description: "Ensemble football Macron maillot + short orange et bleu marine. Marque italienne de référence pour les équipements sportifs, tissu technique de qualité professionnelle.",
+    prix: 18000, prixPromo: null, stock: 20, sku: "MC-ES-001",
+    images: [{ id: 5054, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-macron-orange-bleu-marine.jpeg`, alt: "Ensemble football Macron orange bleu marine" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_MACRON, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+
+  // ================================================================
+  // ENSEMBLES FOOTBALL — NIFTIWARE
+  // ================================================================
+
+  {
+    id: 179, nom: "Ensemble Niftiware Beige/Bleu/Noir", slug: "ensemble-niftiware-beige-bleu-noir",
+    description: "Ensemble football Niftiware maillot + short coloris Beige/Bleu/Noir. Design original et moderne, tissu polyester haute performance, impression sublimation toute surface.",
+    prix: 18000, prixPromo: null, stock: 25, sku: "NF-ES-001",
+    images: [{ id: 5055, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-beige-bleu-noir.jpeg`, alt: "Ensemble Niftiware beige bleu noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 180, nom: "Ensemble Niftiware Blanc/Bleu", slug: "ensemble-niftiware-blanc-bleu",
+    description: "Ensemble football Niftiware maillot + short Blanc/Bleu avec short bleu. Propre et classique, tissu sublimé respirant. Idéal pour la tenue extérieure de votre équipe.",
+    prix: 18000, prixPromo: null, stock: 30, sku: "NF-ES-002",
+    images: [{ id: 5056, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-blanc-bleu-short-bleu.jpeg`, alt: "Ensemble Niftiware blanc bleu" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 181, nom: "Ensemble Niftiware Blanc/Orange Short Rouge", slug: "ensemble-niftiware-blanc-orange-short-rouge",
+    description: "Ensemble football Niftiware maillot Blanc/Orange avec short rouge. Contraste de couleurs dynamique, tissu technique respirant sublimé. Disponible en taille adulte et junior.",
+    prix: 18000, prixPromo: 16000, stock: 22, sku: "NF-ES-003",
+    images: [{ id: 5057, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-blanc-orange-short-rouge.jpeg`, alt: "Ensemble Niftiware blanc orange short rouge" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 182, nom: "Ensemble Niftiware Bleu Gradient Marine", slug: "ensemble-niftiware-bleu-gradient-marine",
+    description: "Ensemble football Niftiware maillot + short Bleu Gradient. Dégradé bleu ciel vers bleu marine, effet visuel moderne. Tissu sublimé premium pour les équipes exigeantes.",
+    prix: 20000, prixPromo: null, stock: 18, sku: "NF-ES-004",
+    images: [{ id: 5058, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-bleu-gradient-marine.jpeg`, alt: "Ensemble Niftiware bleu gradient marine" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 183, nom: "Ensemble Niftiware Bleu/Noir/Rose", slug: "ensemble-niftiware-bleu-noir-rose",
+    description: "Ensemble football Niftiware maillot + short coloris Bleu/Noir/Rose. Design original et percutant, tissu sublimé polyester, flocage et numérotation disponibles en boutique.",
+    prix: 19000, prixPromo: null, stock: 20, sku: "NF-ES-005",
+    images: [{ id: 5059, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-bleu-noir-rose.jpeg`, alt: "Ensemble Niftiware bleu noir rose" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 184, nom: "Ensemble Niftiware Gris/Rose/Noir", slug: "ensemble-niftiware-gris-rose-noir",
+    description: "Ensemble football Niftiware maillot + short Gris/Rose/Noir. Tricolore élégant, tissu technique respirant, idéal pour les équipes féminines ou mixtes.",
+    prix: 19000, prixPromo: null, stock: 18, sku: "NF-ES-006",
+    images: [{ id: 5060, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-gris-rose-noir.jpeg`, alt: "Ensemble Niftiware gris rose noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 185, nom: "Ensemble Niftiware Gardien Jaune/Orange/Noir", slug: "ensemble-niftiware-gardien-jaune-orange-noir",
+    description: "Ensemble gardien de but Niftiware Jaune/Orange/Noir. Maillot manches longues + short, tissu sublimé, design gardien professionnel. Idéal pour les équipes souhaitant équiper leur goal.",
+    prix: 20000, prixPromo: null, stock: 15, sku: "NF-ES-007",
+    images: [{ id: 5061, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-jaune-orange-noir-gardien.jpeg`, alt: "Ensemble Niftiware gardien jaune orange noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 186, nom: "Ensemble Niftiware Or/Noir", slug: "ensemble-niftiware-or-noir",
+    description: "Ensemble football Niftiware maillot + short Or/Noir. Combinaison royale et percutante, tissu sublimé premium. Pour les équipes qui veulent afficher prestige et ambition.",
+    prix: 20000, prixPromo: null, stock: 20, sku: "NF-ES-008",
+    images: [{ id: 5062, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-or-noir.jpeg`, alt: "Ensemble Niftiware or noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: true, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 187, nom: "Ensemble Niftiware Rouge/Noir", slug: "ensemble-niftiware-rouge-noir",
+    description: "Ensemble football Niftiware maillot + short Rouge/Noir. Classique combatif, couleurs intimidantes sur le terrain, tissu sublimé technique respirant.",
+    prix: 18000, prixPromo: null, stock: 28, sku: "NF-ES-009",
+    images: [{ id: 5063, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-rouge-noir.jpeg`, alt: "Ensemble Niftiware rouge noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 188, nom: "Ensemble Niftiware Turquoise/Marine/Orange", slug: "ensemble-niftiware-turquoise-marine-orange",
+    description: "Ensemble football Niftiware maillot + short Turquoise/Marine/Orange. Tricolore unique et original, tissu sublimé toutes surfaces. Idéal pour se différencier sur le terrain.",
+    prix: 19000, prixPromo: null, stock: 22, sku: "NF-ES-010",
+    images: [{ id: 5064, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-turquoise-marine-orange.jpeg`, alt: "Ensemble Niftiware turquoise marine orange" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
+  {
+    id: 189, nom: "Ensemble Niftiware Vert Menthe/Noir", slug: "ensemble-niftiware-vert-menthe-noir",
+    description: "Ensemble football Niftiware maillot + short Vert Menthe/Noir. Fraîcheur et originalité sur le terrain, tissu technique sublimé de qualité professionnelle.",
+    prix: 18000, prixPromo: null, stock: 24, sku: "NF-ES-011",
+    images: [{ id: 5065, url: `${MAILLOTS_IMG_BASE}/ensemble-foot-niftiware-vert-menthe-noir.jpeg`, alt: "Ensemble Niftiware vert menthe noir" }],
+    categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
+    createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
+  },
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
@@ -1396,4 +1748,5 @@ export const MOCK_CATEGORIES: Category[] = [
 export const MOCK_BRANDS: Brand[] = [
   BRAND_NIKE, BRAND_ADIDAS, BRAND_UNDER_ARMOUR, BRAND_VEEDAR, BRAND_EMMA_SPORT,
   BRAND_DERBYSTAR, BRAND_KIPSTA, BRAND_MOLTEN, BRAND_PUMA, BRAND_PRIMERA,
+  BRAND_JORDAN, BRAND_UMBRO, BRAND_NIFTIWARE, BRAND_MACRON,
 ];
