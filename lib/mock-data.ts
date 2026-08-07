@@ -9,6 +9,7 @@ const CAT_JOGGING: Category = { id: 6, nom: "Jogging", slug: "jogging", image: n
 const CAT_BASKETS: Category = { id: 7, nom: "Baskets", slug: "baskets", image: null };
 const CAT_EQUIPEMENTS: Category = { id: 8, nom: "Équipements", slug: "equipements", image: null };
 const CAT_ACCESSOIRES: Category = { id: 9, nom: "Accessoires", slug: "accessoires", image: null };
+const CAT_TROPHEES: Category = { id: 10, nom: "Trophées", slug: "trophees", image: null };
 
 const BRAND_NIKE: Brand = { id: 1, nom: "Nike", logo: null };
 const BRAND_ADIDAS: Brand = { id: 2, nom: "Adidas", logo: null };
@@ -31,6 +32,7 @@ const ACCESSOIRES_IMG_BASE = "/articles/Accessoires";
 const BALLONS_IMG_BASE = "/articles/Ballons";
 const CHAUSSURES_IMG_BASE = "/articles/Chaussures/Nike";
 const MAILLOTS_IMG_BASE = "/articles/Maillots";
+const TROPHEES_IMG_BASE = "/articles/Trophees";
 
 const TYPE_SHORT: ArticleType = { slug: "short", nom: "Short" };
 const TYPE_JOGGING: ArticleType = { slug: "jogging", nom: "Jogging" };
@@ -47,11 +49,12 @@ const TYPE_SAC: ArticleType = { slug: "sac", nom: "Sac" };
 const TYPE_GANTS: ArticleType = { slug: "gants", nom: "Gants" };
 const TYPE_PROTECTION: ArticleType = { slug: "protection", nom: "Protection" };
 const TYPE_ENSEMBLE: ArticleType = { slug: "ensemble", nom: "Ensemble" };
+const TYPE_TROPHEE: ArticleType = { slug: "trophee", nom: "Trophée" };
 
 export const ARTICLE_TYPES: ArticleType[] = [
   TYPE_SHORT, TYPE_JOGGING, TYPE_TSHIRT, TYPE_DEBARDEUR, TYPE_CHAUSSETTES,
   TYPE_CHAUSSURES, TYPE_CRAMPONS, TYPE_MAILLOT, TYPE_ENSEMBLE, TYPE_VESTE,
-  TYPE_EQUIPEMENT, TYPE_BALLON, TYPE_SAC, TYPE_GANTS, TYPE_PROTECTION,
+  TYPE_EQUIPEMENT, TYPE_BALLON, TYPE_SAC, TYPE_GANTS, TYPE_PROTECTION, TYPE_TROPHEE,
 ];
 
 export const MOCK_PRODUCTS: Product[] = [
@@ -1738,11 +1741,67 @@ export const MOCK_PRODUCTS: Product[] = [
     categorie: CAT_FOOTBALL, marque: BRAND_NIFTIWARE, typeArticle: TYPE_ENSEMBLE, vedette: false, disponible: true,
     createdAt: "2026-07-15T00:00:00.000Z", updatedAt: "2026-07-15T00:00:00.000Z",
   },
+
+  // ================================================================
+  // TROPHÉES
+  // ================================================================
+
+  {
+    id: 190, nom: "Trophée Coupe Dorée Ailes & Chevrons", slug: "trophee-coupe-doree-ailes-chevrons",
+    description: "Trophée coupe dorée avec décoration ailes et chevrons en relief. Finition dorée brillante, base solide. Idéal pour récompenser les vainqueurs de tournois, coupes et championnats locaux.",
+    prix: 15000, prixPromo: null, stock: 20, sku: "TR-001",
+    images: [{ id: 6001, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-ailes-chevrons.jpeg`, alt: "Trophée coupe dorée ailes et chevrons" }],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: false, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
+  {
+    id: 191, nom: "Trophée Coupe Dorée Classique", slug: "trophee-coupe-doree-classique",
+    description: "Trophée coupe dorée classique sans couvercle. Design intemporel aux lignes épurées, finition dorée soignée. Parfait pour tous types de compétitions sportives et cérémonies de remise de prix.",
+    prix: 12000, prixPromo: null, stock: 30, sku: "TR-002",
+    images: [{ id: 6002, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-classique-sans-couvercle.jpeg`, alt: "Trophée coupe dorée classique" }],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: false, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
+  {
+    id: 192, nom: "Trophée Coupe Dorée Étoile Socle Marbre", slug: "trophee-coupe-doree-etoile-socle-marbre",
+    description: "Trophée coupe dorée étoile sur socle en marbre. Association prestigieuse du métal doré brillant et du socle marbre robuste — un trophée haut de gamme pour les compétitions majeures.",
+    prix: 22000, prixPromo: null, stock: 15, sku: "TR-003",
+    images: [
+      { id: 6003, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-etoile-socle-marbre.jpeg`, alt: "Trophée coupe dorée étoile socle marbre" },
+      { id: 6004, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-etoile-socle-marbre-2.jpeg`, alt: "Trophée coupe dorée étoile socle marbre vue 2" },
+    ],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: true, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
+  {
+    id: 193, nom: "Trophée Coupe Dorée Fleur de Lys", slug: "trophee-coupe-doree-fleur-de-lys",
+    description: "Trophée coupe dorée ornée d'une fleur de lys en relief. Design élégant et distinctif, finition dorée de qualité. Pour valoriser les lauréats avec style lors de remises de prix officielles.",
+    prix: 16000, prixPromo: null, stock: 18, sku: "TR-004",
+    images: [{ id: 6005, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-fleur-de-lys.jpeg`, alt: "Trophée coupe dorée fleur de lys" }],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: false, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
+  {
+    id: 194, nom: "Trophée Coupe Dorée Martelée Lauriers", slug: "trophee-coupe-doree-martelee-lauriers",
+    description: "Trophée coupe dorée martelée avec couronne de lauriers. Texture martelée artisanale unique, décoration lauriers symbole de victoire. Un trophée qui incarne l'excellence sportive.",
+    prix: 18000, prixPromo: null, stock: 12, sku: "TR-005",
+    images: [{ id: 6006, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-martelee-lauriers.jpeg`, alt: "Trophée coupe dorée martelée lauriers" }],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: false, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
+  {
+    id: 195, nom: "Trophée Coupe Dorée Médaillon Lauriers Grand", slug: "trophee-coupe-doree-medaillon-lauriers-grand",
+    description: "Grand trophée coupe dorée avec médaillon et couronne de lauriers. Format imposant pour les événements majeurs, finition dorée luxueuse. Le trophée qu'on exhibe avec fierté.",
+    prix: 25000, prixPromo: null, stock: 8, sku: "TR-006",
+    images: [{ id: 6007, url: `${TROPHEES_IMG_BASE}/trophee-coupe-doree-medaillon-lauriers-grand.jpeg`, alt: "Trophée coupe dorée médaillon lauriers grand" }],
+    categorie: CAT_TROPHEES, marque: BRAND_EMMA_SPORT, typeArticle: TYPE_TROPHEE, vedette: true, disponible: true,
+    createdAt: "2026-07-20T00:00:00.000Z", updatedAt: "2026-07-20T00:00:00.000Z",
+  },
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
   CAT_RUNNING, CAT_FOOTBALL, CAT_FITNESS, CAT_MUSCU,
-  CAT_BASKET, CAT_JOGGING, CAT_BASKETS, CAT_EQUIPEMENTS, CAT_ACCESSOIRES,
+  CAT_BASKET, CAT_JOGGING, CAT_BASKETS, CAT_EQUIPEMENTS, CAT_ACCESSOIRES, CAT_TROPHEES,
 ];
 
 export const MOCK_BRANDS: Brand[] = [
