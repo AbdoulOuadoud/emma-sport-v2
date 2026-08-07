@@ -67,9 +67,9 @@ export default function CartDrawer() {
                           <Image
                             src={img}
                             alt={product.nom}
-                            fill
-                            style={{ objectFit: "cover" }}
-                            sizes="72px"
+                            width={72}
+                            height={72}
+                            style={{ objectFit: "cover", width: "100%", height: "100%" }}
                           />
                         ) : (
                           <div

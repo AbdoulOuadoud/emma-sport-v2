@@ -1652,6 +1652,7 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   flex: none;
 }
+.cart-item-img img { display: block; }
 .cart-item-name {
   font-family: var(--font-display);
   font-weight: 600;
