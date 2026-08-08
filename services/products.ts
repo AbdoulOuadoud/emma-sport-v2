@@ -62,6 +62,28 @@ export async function getProducts(
   return { data, meta: { pagination: { page, pageSize, pageCount, total } } };
 }
 
+export async function getOnePerCategory(): Promise<ListResponse<Product>> {
+  const seen = new Set<string>();
+  const result: Product[] = [];
+
+  const ordered = [
+    ...MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible && p.images.length > 0),
+    ...MOCK_PRODUCTS.filter((p) => !p.vedette && p.disponible && p.images.length > 0),
+  ];
+
+  for (const p of ordered) {
+    if (!seen.has(p.categorie.slug)) {
+      seen.add(p.categorie.slug);
+      result.push(p);
+    }
+  }
+
+  return {
+    data: result,
+    meta: { pagination: { page: 1, pageSize: result.length, pageCount: 1, total: result.length } },
+  };
+}
+
 export async function getFeaturedProducts(): Promise<ListResponse<Product>> {
   const featured = MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible);
   return {

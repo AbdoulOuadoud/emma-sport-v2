@@ -5,7 +5,7 @@ import Header from "@/components/home/Header";
 import Footer from "@/components/home/Footer";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import CatalogueClient from "@/components/catalogue/CatalogueClient";
-import { getProducts, getCategories, getBrands, getArticleTypes } from "@/services/products";
+import { getProducts, getOnePerCategory, getCategories, getBrands, getArticleTypes } from "@/services/products";
 import type { ProductFilters, SortOption } from "@/types";
 import { getSearchParam, getSearchParamNumber } from "@/lib/utils";
 
@@ -38,10 +38,13 @@ export default async function CataloguePage({ searchParams }: PageProps) {
     pageSize: 12,
   };
 
-  const isDefaultSort = !sp.sort || sp.sort === "random";
+  const isDefaultView =
+    !sp.search && !sp.categorie && !sp.marque && !sp.typeArticle &&
+    !sp.prixMin && !sp.prixMax && !sp.page &&
+    (!sp.sort || sp.sort === "random");
 
   const [productsRes, categoriesRes, brandsRes, articleTypes] = await Promise.all([
-    getProducts(filters),
+    isDefaultView ? getOnePerCategory() : getProducts(filters),
     getCategories(),
     getBrands(),
     getArticleTypes(),
@@ -86,7 +89,7 @@ export default async function CataloguePage({ searchParams }: PageProps) {
                 brands={brandsRes.data}
                 articleTypes={articleTypes}
                 pagination={productsRes.meta.pagination}
-                isDefaultSort={isDefaultSort}
+                isDefaultSort={isDefaultView}
               />
             </Suspense>
           </div>
