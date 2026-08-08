@@ -22,7 +22,6 @@ const FILTERS = [
   ...uniqueTypes.map((t) => ({ key: t.slug, label: t.nom })),
 ];
 
-const DELAYS = ["", "d1", "d2", "d3"];
 
 const HeartIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -87,13 +86,12 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid-products">
-          {filtered.map((p, i) => {
+          {filtered.map((p) => {
             const price = p.prixPromo ?? p.prix;
             const discountPct = p.prixPromo
               ? getDiscountPercent(p.prix, p.prixPromo)
               : null;
             const img = p.images[0]?.url ?? null;
-            const delay = DELAYS[i % 4];
             const isAdded = added.has(p.id);
 
             const badge = discountPct
@@ -104,7 +102,7 @@ export default function FeaturedProducts() {
               <Link
                 key={p.id}
                 href={`/produits/${p.slug}`}
-                className={`card reveal${delay ? ` ${delay}` : ""}`}
+                className="card"
               >
                 <div className="media">
                   <span className={`badge ${badge.cls}`}>{badge.label}</span>
