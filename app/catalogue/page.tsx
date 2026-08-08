@@ -9,7 +9,7 @@ import { getProducts, getCategories, getBrands, getArticleTypes } from "@/servic
 import type { ProductFilters, SortOption } from "@/types";
 import { getSearchParam, getSearchParamNumber } from "@/lib/utils";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Catalogue",
@@ -33,7 +33,7 @@ export default async function CataloguePage({ searchParams }: PageProps) {
     prixMax: getSearchParamNumber(sp.prixMax),
     disponible:
       sp.disponible === "true" ? true : sp.disponible === "false" ? false : undefined,
-    sort: (getSearchParam(sp.sort) as SortOption | undefined) ?? "createdAt:desc",
+    sort: (getSearchParam(sp.sort) as SortOption | undefined) ?? "random",
     page: getSearchParamNumber(sp.page) ?? 1,
     pageSize: 12,
   };

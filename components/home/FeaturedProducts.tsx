@@ -7,7 +7,7 @@ import { MOCK_PRODUCTS } from "@/lib/mock-data";
 import { useCart } from "@/contexts/CartContext";
 import { formatPrice, getDiscountPercent } from "@/lib/utils";
 
-const VEDETTE = MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible);
+const VEDETTE = MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible && p.images.length > 0);
 
 const uniqueCats = [
   ...new Map(VEDETTE.map((p) => [p.categorie.slug, p.categorie])).values(),

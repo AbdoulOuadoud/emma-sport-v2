@@ -5,6 +5,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { SortOption } from "@/types";
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "random", label: "Recommandés" },
   { value: "createdAt:desc", label: "Nouveautés" },
   { value: "prix:asc", label: "Prix croissant" },
   { value: "prix:desc", label: "Prix décroissant" },
@@ -35,7 +36,7 @@ export default function CatalogueToolbar({
   const searchParams = useSearchParams();
 
   const currentSearch = searchParams.get("search") ?? "";
-  const currentSort = (searchParams.get("sort") as SortOption | null) ?? "createdAt:desc";
+  const currentSort = (searchParams.get("sort") as SortOption | null) ?? "random";
 
   const [search, setSearch] = useState(currentSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);

@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     title: "Emma Sport",
     description: "Équipements sportifs au Bénin — Football, Fitness, Musculation, Trophées et plus.",
   },
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: "/favicon.png",
+  },
   robots: {
     index: true,
     follow: true,

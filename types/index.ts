@@ -56,6 +56,7 @@ export interface ListResponse<T> {
 }
 
 export type SortOption =
+  | "random"
   | "prix:asc"
   | "prix:desc"
   | "nom:asc"
