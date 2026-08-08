@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand, ArticleType } from "@/types";
 import ProductCard from "@/components/catalogue/ProductCard";
 import CatalogueFilters from "@/components/catalogue/CatalogueFilters";
 import CatalogueToolbar from "@/components/catalogue/CatalogueToolbar";
 import Pagination from "@/components/catalogue/Pagination";
 
-function shuffle<T>(arr: T[]): T[] {
+function fisherYates<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -23,6 +22,7 @@ interface CatalogueClientProps {
   brands: Brand[];
   articleTypes: ArticleType[];
   pagination: { page: number; pageCount: number; total: number };
+  isDefaultSort: boolean;
 }
 
 const EmptyIcon = () => (
@@ -37,15 +37,14 @@ export default function CatalogueClient({
   brands,
   articleTypes,
   pagination,
+  isDefaultSort,
 }: CatalogueClientProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [displayProducts, setDisplayProducts] = useState(products);
-  const searchParams = useSearchParams();
-  const currentSort = searchParams.get("sort") ?? "random";
 
   useEffect(() => {
-    setDisplayProducts(currentSort === "random" ? shuffle(products) : products);
-  }, [products, currentSort]);
+    setDisplayProducts(isDefaultSort ? fisherYates(products) : products);
+  }, [products, isDefaultSort]);
 
   return (
     <>

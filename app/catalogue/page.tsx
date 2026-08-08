@@ -38,6 +38,8 @@ export default async function CataloguePage({ searchParams }: PageProps) {
     pageSize: 12,
   };
 
+  const isDefaultSort = !sp.sort || sp.sort === "random";
+
   const [productsRes, categoriesRes, brandsRes, articleTypes] = await Promise.all([
     getProducts(filters),
     getCategories(),
@@ -84,6 +86,7 @@ export default async function CataloguePage({ searchParams }: PageProps) {
                 brands={brandsRes.data}
                 articleTypes={articleTypes}
                 pagination={productsRes.meta.pagination}
+                isDefaultSort={isDefaultSort}
               />
             </Suspense>
           </div>
