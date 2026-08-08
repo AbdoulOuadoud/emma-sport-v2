@@ -9,13 +9,17 @@ import { formatPrice, getDiscountPercent } from "@/lib/utils";
 
 const VEDETTE = MOCK_PRODUCTS.filter((p) => p.vedette && p.disponible && p.images.length > 0);
 
-const uniqueCats = [
-  ...new Map(VEDETTE.map((p) => [p.categorie.slug, p.categorie])).values(),
+const uniqueTypes = [
+  ...new Map(
+    VEDETTE
+      .filter((p) => p.typeArticle)
+      .map((p) => [p.typeArticle!.slug, p.typeArticle!])
+  ).values(),
 ];
 
 const FILTERS = [
   { key: "all", label: "Tous" },
-  ...uniqueCats.map((c) => ({ key: c.slug, label: c.nom })),
+  ...uniqueTypes.map((t) => ({ key: t.slug, label: t.nom })),
 ];
 
 const DELAYS = ["", "d1", "d2", "d3"];
@@ -33,7 +37,7 @@ export default function FeaturedProducts() {
   const { addToCart } = useCart();
 
   const filtered = VEDETTE.filter(
-    (p) => activeFilter === "all" || p.categorie.slug === activeFilter
+    (p) => activeFilter === "all" || p.typeArticle?.slug === activeFilter
   );
 
   const toggleFav = (e: React.MouseEvent, id: number) => {
