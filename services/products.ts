@@ -45,17 +45,11 @@ export async function getProducts(
     case "nom:asc":
       results.sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
       break;
-    case "createdAt:desc":
+    default:
       results.sort(
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
-      break;
-    default:
-      for (let i = results.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [results[i], results[j]] = [results[j], results[i]];
-      }
   }
 
   const page = filters.page ?? 1;

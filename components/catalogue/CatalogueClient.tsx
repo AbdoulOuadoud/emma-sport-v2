@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand, ArticleType } from "@/types";
 import ProductCard from "@/components/catalogue/ProductCard";
 import CatalogueFilters from "@/components/catalogue/CatalogueFilters";
 import CatalogueToolbar from "@/components/catalogue/CatalogueToolbar";
 import Pagination from "@/components/catalogue/Pagination";
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 interface CatalogueClientProps {
   products: Product[];
@@ -29,6 +39,13 @@ export default function CatalogueClient({
   pagination,
 }: CatalogueClientProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [displayProducts, setDisplayProducts] = useState(products);
+  const searchParams = useSearchParams();
+  const currentSort = searchParams.get("sort") ?? "random";
+
+  useEffect(() => {
+    setDisplayProducts(currentSort === "random" ? shuffle(products) : products);
+  }, [products, currentSort]);
 
   return (
     <>
@@ -63,7 +80,7 @@ export default function CatalogueClient({
           ) : (
             <>
               <div className="grid-products">
-                {products.map((product) => (
+                {displayProducts.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={product}

@@ -9,7 +9,7 @@ import { getProducts, getCategories, getBrands, getArticleTypes } from "@/servic
 import type { ProductFilters, SortOption } from "@/types";
 import { getSearchParam, getSearchParamNumber } from "@/lib/utils";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Catalogue",
